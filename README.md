@@ -5,7 +5,7 @@ Emomix is a web-based messaging application that analyzes the contents of the me
 
 ## Technologies Used
 
-We'll be using
+We'll be using  
 1. The HTML5 suite (HTML5, CSS3, Javascript)  
 2. Node.js  
 3. Angular.js  
