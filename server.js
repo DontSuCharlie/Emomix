@@ -10,7 +10,7 @@ var jade = require('jade');
 
 // Using Jade
 
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/public');
 app.set('view engine', 'jade');
 app.set("view options", { layout: false });
 
