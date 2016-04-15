@@ -7,11 +7,11 @@ Emomix is a web-based messaging application that analyzes the contents of the me
 
 We'll be using  
 1. The HTML5 suite (HTML5, CSS3, Javascript)  
-2. Backend-Node.js  
-3. Angular.js  
-4. NOSQL-MongoDB
+2. Node.js (Backend Framework)  
+3. Express.js + Jade (Frontend Framework)  
+4. MongoDB (NoSQL Database)  
 5. IBM Bluemix  
-6. IBM Watson Tone alayzer API  
+6. IBM Watson Tone Analyzer API  
 
 ## The Team
 
