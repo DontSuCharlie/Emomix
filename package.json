@@ -1,0 +1,23 @@
+{
+  "name": "Emomix",
+  "version": "1.0.0",
+  "description": "Messaging app with emotion detection",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DontSuCharlie/Emomix.git"
+  },
+  "keywords": [
+    "lab"
+  ],
+  "author": "tarang",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/DontSuCharlie/Emomix/issues"
+  },
+  "homepage": "https://github.com/DontSuCharlie/Emomix"
+}
