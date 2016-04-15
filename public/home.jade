@@ -1,0 +1,17 @@
+doctype HTML
+html
+    head
+        title Emomix
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+        script(src="/socket.io/socket.io.js")
+    body
+        div.container
+            header
+                h1 Messaging App
+            input(type='text')#nameInput
+            button#nameSet Set Name
+            div#chatEntries
+            div#chatControls
+                input(type='text')#messageInput
+                button#submit Send
+            p Hello, World! Welcome to the char #{nameInput}
