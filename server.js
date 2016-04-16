@@ -12,6 +12,8 @@ var http = require('http')
   , server = http.createServer(app)
   , io = require('socket.io').listen(server);
 var jade = require('jade');
+var nameArray = ['Tarang'];
+var users = 0; //number of connected users
 
 // Using Jade
 
@@ -40,23 +42,28 @@ app.get('/settings', function(req, res){
   res.render('settings.jade');
 });
 
-
-
-// server.listen(serverPort); // for running locally
-// console.log("Server listening on port " + serverPort);
-
 io.sockets.on('connection', function (socket) {
     // new connection
-	socket.on('setName', function (data) {
-		socket.set('name', data);
-	});
-
 	socket.on('message', function (data) { // Broadcast the message
-		if(pseudoSet(socket))
+		if(nameSet(socket))
 		{
 			var transmit = {date : new Date().toISOString(), pseudo : socket.nickname, message : data};
 			socket.broadcast.emit('message', transmit);
 			console.log("user "+ transmit['pseudo'] +" said \""+data+"\"");
+		}
+	});
+	users += 1; 
+	socket.on('setName', function (data) { // Assign a name to the user
+		if (nameArray.indexOf(data) == -1) // Test if the name is already taken
+		{
+			nameArray.push(data);
+			socket.nickname = data;
+			socket.emit('nameStatus', 'ok');
+			console.log("user " + data + " connected");
+		}
+		else
+		{
+			socket.emit('nameStatus', 'error') // Send the error
 		}
 	});
 });
