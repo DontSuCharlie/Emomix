@@ -1,5 +1,5 @@
 // var serverPort = 43543;
-
+// server side
 // Import
 
 var cfenv = require('cfenv'); // for bluemix
@@ -45,14 +45,11 @@ app.get('/settings', function(req, res){
 io.sockets.on('connection', function (socket) {
     // new connection
 	socket.on('message', function (data) { // Broadcast the message
-		if(nameSet(socket))
-		{
-			var transmit = {date : new Date().toISOString(), pseudo : socket.nickname, message : data};
-			socket.broadcast.emit('message', transmit);
-			console.log("user "+ transmit['pseudo'] +" said \""+data+"\"");
-		}
+		var transmit = {name : socket.nickname, message : data};
+		socket.broadcast.emit('message', transmit);
+		console.log("user "+ transmit['name'] +" said \""+data+"\"");
 	});
-	users += 1; 
+	users += 1; // increment number of users 
 	socket.on('setName', function (data) { // Assign a name to the user
 		if (nameArray.indexOf(data) == -1) // Test if the name is already taken
 		{
