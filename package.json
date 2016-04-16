@@ -4,7 +4,6 @@
   "description": "Messaging app with emotion detection",
   "main": "server.js",
   "scripts": {
-    "test": "test",
     "start": "node server.js"
   },
   "repository": {
