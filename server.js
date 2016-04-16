@@ -1,8 +1,11 @@
-var serverPort = 43543;
+// var serverPort = 43543;
 
 // Import
 
 var cfenv = require('cfenv'); // for bluemix
+// run locally or on cloud
+var serverPort = (process.env.VCAP_APP_PORT || 3000);
+var host = (process.env.VCAP_APP_HOST || '0.0.0.0');
 
 var express = require('express'), app = express();
 var http = require('http')
@@ -14,6 +17,12 @@ var jade = require('jade');
 
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
+
+server.listen(serverPort, host, function() {
+	// print a message when the server starts listening
+  console.log("server starting on " + appEnv.url);
+});
+
 
 app.set('views', __dirname + '/public');
 app.set('view engine', 'jade');
@@ -32,10 +41,6 @@ app.get('/settings', function(req, res){
 });
 
 
-server.listen(appEnv.port, '0.0.0.0', function() {
-	// print a message when the server starts listening
-  console.log("server starting on " + appEnv.url);
-});
 
 // server.listen(serverPort); // for running locally
 // console.log("Server listening on port " + serverPort);
@@ -55,5 +60,3 @@ io.sockets.on('connection', function (socket) {
 		}
 	});
 });
-
-
