@@ -2,6 +2,8 @@ var serverPort = 43543;
 
 // Import
 
+var cfenv = require('cfenv'); // for bluemix
+
 var express = require('express'), app = express();
 var http = require('http')
   , server = http.createServer(app)
@@ -9,6 +11,9 @@ var http = require('http')
 var jade = require('jade');
 
 // Using Jade
+
+// get the app environment from Cloud Foundry
+var appEnv = cfenv.getAppEnv();
 
 app.set('views', __dirname + '/public');
 app.set('view engine', 'jade');
@@ -26,8 +31,14 @@ app.get('/settings', function(req, res){
   res.render('settings.jade');
 });
 
-server.listen(serverPort);
-console.log("Server listening on port " + serverPort);
+
+server.listen(appEnv.port, '0.0.0.0', function() {
+	// print a message when the server starts listening
+  console.log("server starting on " + appEnv.url);
+});
+
+// server.listen(serverPort); // for running locally
+// console.log("Server listening on port " + serverPort);
 
 io.sockets.on('connection', function (socket) {
     // new connection
