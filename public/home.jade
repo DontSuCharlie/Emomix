@@ -5,12 +5,14 @@ html
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
         script(src="/socket.io/socket.io.js")
         script(src="script.js")
+        link(rel="stylesheet", href="style.css")
     body
         div.container
             header
                 h1(align="center") Language Analysis Messaging App
-            input(type='text')#nameInput
-            button#nameSet Set Name
+            div.form
+                input(type='text')#nameInput
+                button#nameSet Set Name
             div#chatEntries
             div#chatControls
                 input(type='text')#messageInput
