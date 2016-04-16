@@ -20,7 +20,7 @@ var appEnv = cfenv.getAppEnv();
 
 server.listen(serverPort, host, function() {
 	// print a message when the server starts listening
-  console.log("server starting on " + appEnv.url);
+  console.log("server starting on " + host + ":" + serverPort);
 });
 
 
