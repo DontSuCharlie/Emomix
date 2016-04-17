@@ -72,10 +72,14 @@ $(function() {
 		      clearTimeout(timeout);
 		      timeout = setTimeout(timeoutFunction, 5000);
 		    }
+		} else {
+			sendMessage();
 		}
 	});
 
     $("#nameSet").click(function() {setName()});
+    $('#nameForm').modal("open");
     $("#submit").click(function() {sendMessage();});
+    $("#chatEntries").slimScroll({height: '600px'});
     $("#welcomeParagraph").hide();
 });

@@ -10,10 +10,20 @@ var host = (process.env.VCAP_APP_HOST || '0.0.0.0');
 var express = require('express'), app = express();
 var http = require('http')
   , server = http.createServer(app)
-  , io = require('socket.io').listen(server);
+  , io = require('socket.io').listen(server)
+  , watson = require('watson-developer-cloud');
 var jade = require('jade');
 var nameArray = ['Tarang'];
 var users = 0; //number of connected users
+
+// Create the service wrapper
+var toneAnalyzer = watson.tone_analyzer({
+  url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api/',
+  username: '<username>',
+  password: '<password>',
+  version_date: '2016-11-02',
+  version: 'v3-beta'
+});
 
 // Using Jade
 
@@ -36,6 +46,15 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
   res.render('home.jade');
+});
+
+app.post('/api/tone', function(req, res, next) {
+  toneAnalyzer.tone(req.body, function(err, data) {
+    if (err)
+      return next(err);
+    else
+      return res.json(data);
+  });
 });
 
 app.get('/settings', function(req, res){
