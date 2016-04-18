@@ -13,17 +13,8 @@ var http = require('http')
   , io = require('socket.io').listen(server)
   , watson = require('watson-developer-cloud');
 var jade = require('jade');
-var nameArray = ['Tarang'];
+var nameArray = [''];
 var users = 0; //number of connected users
-
-// Create the service wrapper
-var toneAnalyzer = watson.tone_analyzer({
-  url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api/',
-  username: '<username>',
-  password: '<password>',
-  version_date: '2016-11-02',
-  version: 'v3-beta'
-});
 
 // Using Jade
 
@@ -47,14 +38,21 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res){
   res.render('home.jade');
 });
+var watson = require('watson-developer-cloud');
 
-app.post('/api/tone', function(req, res, next) {
-  toneAnalyzer.tone(req.body, function(err, data) {
+var tone_analyzer = watson.tone_analyzer({
+  username: '170164d6-1f7b-4e0b-8d7c-aaf844ea0d5a',
+  password: 'oX1pVjLDnWZj',
+  version: 'v3-beta',
+  version_date: '2016-02-11'
+});
+
+tone_analyzer.tone({ text: 'This project is going to be epic!' },
+  function(err, tone) {
     if (err)
-      return next(err);
+      console.log(err);
     else
-      return res.json(data);
-  });
+      console.log(JSON.stringify(tone, null, 2));
 });
 
 app.get('/settings', function(req, res){
