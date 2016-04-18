@@ -21,10 +21,14 @@ html, input {
 }
 
 #messageInput {
-	width: 830px;
-	margin-left: 5px;
+	width: 90%;
+	margin-left: 2px;
+	height: 20px;
 }
-
+#submit {
+	width:7%;
+	margin-left: 4px;
+}
 #chatEntries {
     margin: 40px auto;
     min-height: 310px;
