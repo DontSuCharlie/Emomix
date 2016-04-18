@@ -1,3 +1,4 @@
+
 // client side config
 var socket = io.connect();
 // to see if user is typing
@@ -35,6 +36,7 @@ function sendMessage() {
 function setName() {
     if ($("#nameInput").val() != "")
     {
+    	$.modal.close();
     	socket.emit('setName', $("#nameInput").val());
         socket.on('nameStatus', function(data){
 			if(data == "ok")
@@ -76,9 +78,8 @@ $(function() {
 			sendMessage();
 		}
 	});
-
+    $('#nameForm').modal();
     $("#nameSet").click(function() {setName()});
     $("#submit").click(function() {sendMessage();});
-    $("#chatEntries").slimScroll({height: '600px'});
     $("#welcomeParagraph").hide();
 });
