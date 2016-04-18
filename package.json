@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/DontSuCharlie/Emomix",
   "dependencies": {
+    "node-notifier": "^4.5.0",
     "watson-developer-cloud": "^1.4.1"
   }
 }
