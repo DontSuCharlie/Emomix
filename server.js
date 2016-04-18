@@ -63,7 +63,7 @@ io.sockets.on('connection', function (socket) {
     // new connection
 	socket.on('message', function (data) { // Broadcast the message
 		var transmit = {name : socket.nickname, message : data};
-		socket.broadcast.emit('message', transmit);
+		io.sockets.emit('message', transmit);
 		tone_analyzer.tone({ text: data },
 		  function(err, tone) {
 		    if (err)
@@ -88,7 +88,7 @@ io.sockets.on('connection', function (socket) {
 				console.log(emotionTone[largest]["tone_name"]);
 				// need better way to show emotion along with message--both same time
 				var transmit2 = {name : socket.nickname, message : "Emotion is " + emotionTone[largest]["tone_name"]};
-				socket.broadcast.emit('message', transmit2);
+				io.sockets.emit('message', transmit2);
 		    }
 		});
 

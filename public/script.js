@@ -28,7 +28,7 @@ function sendMessage() {
     if ($('#messageInput').val() != "") 
     {
         socket.emit('message', $('#messageInput').val());
-        addMessage($('#messageInput').val(), "Me"); // replace Me with current user
+        // addMessage($('#messageInput').val(), "Me"); // replace Me with current user
         $('#messageInput').val(''); // clear
     }
 }
@@ -42,7 +42,7 @@ function setName() {
 			{
 				// user entered room -- make light colored
 				socket.emit('message', "User " + $("#nameInput").val() + " entered the room");
-				addMessage("User " + $("#nameInput").val() + " entered room", "Me"); 
+				// addMessage("User " + $("#nameInput").val() + " entered room", "Me"); 
 		        
 		        $('#chatControls').show();
 		        $('#nameInput').hide();
