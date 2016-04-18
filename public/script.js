@@ -41,6 +41,10 @@ function setName() {
         socket.on('nameStatus', function(data){
 			if(data == "ok")
 			{
+				// user entered room -- make light colored
+				socket.emit('message', "User " + $("#nameInput").val() + " entered the room");
+				addMessage("User " + $("#nameInput").val() + " entered room", "Me"); 
+		        
 		        $('#chatControls').show();
 		        $('#nameInput').hide();
 		        $('#nameSet').hide();
@@ -50,6 +54,7 @@ function setName() {
 			else
 			{
 				alert("Name Already Taken");
+				$('#nameForm').modal();
 			}
 		})
     }
