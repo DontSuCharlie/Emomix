@@ -47,13 +47,13 @@ var tone_analyzer = watson.tone_analyzer({
   version_date: '2016-02-11'
 });
 
-tone_analyzer.tone({ text: 'This project is going to be epic!' },
-  function(err, tone) {
-    if (err)
-      console.log(err);
-    else
-      console.log(JSON.stringify(tone, null, 2));
-});
+// tone_analyzer.tone({ text: 'This project is going to be epic!' },
+//   function(err, tone) {
+//     if (err)
+//       console.log(err);
+//     else
+//       console.log(JSON.stringify(tone, null, 2));
+// });
 
 app.get('/settings', function(req, res){
   res.render('settings.jade');
@@ -64,6 +64,34 @@ io.sockets.on('connection', function (socket) {
 	socket.on('message', function (data) { // Broadcast the message
 		var transmit = {name : socket.nickname, message : data};
 		socket.broadcast.emit('message', transmit);
+		tone_analyzer.tone({ text: data },
+		  function(err, tone) {
+		    if (err)
+		    	console.log(err);
+		    else {
+				// console.log(JSON.stringify(tone, null, 2));
+				var emotionTone = tone.document_tone.tone_categories[0].tones,
+				writingTone = tone.document_tone.tone_categories[1].tones,
+				socialTone = tone.document_tone.tone_categories[2].tones;
+				// console.log(JSON.stringify(emotionTone, null, 2));
+				// find largest emotion
+				largest = 0;
+				for ( var i = 0, l = emotionTone.length; i < l; i++ ) {
+					// console.log("is " + emotionTone[i]["score"] + " larger" + emotionTone[largest]["score"]);
+					if(emotionTone[i]["score"] > emotionTone[largest]["score"]) {
+						largest = i;
+					}
+				    // console.log(emotionTone[i]["score"]);
+				    // console.log(emotionTone[i]["tone_name"]);
+				}
+				console.log(emotionTone[largest]["score"]);
+				console.log(emotionTone[largest]["tone_name"]);
+				// need better way to show emotion along with message--both same time
+				var transmit2 = {name : socket.nickname, message : "Emotion is " + emotionTone[largest]["tone_name"]};
+				socket.broadcast.emit('message', transmit2);
+		    }
+		});
+
 		console.log("user "+ transmit['name'] +" said \""+data+"\"");
 	});
 	users += 1; // increment number of users 
