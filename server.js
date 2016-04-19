@@ -13,8 +13,12 @@ var http = require('http')
   , io = require('socket.io').listen(server)
   , watson = require('watson-developer-cloud');
 var jade = require('jade');
-var nameArray = [''];
+var nameArray = [];	// contain all name of user in the room
 var users = 0; //number of connected users
+var allUser = function(uName){
+	this.name = uName;
+};
+
 
 // Using Jade
 
@@ -99,6 +103,7 @@ io.sockets.on('connection', function (socket) {
 		if (nameArray.indexOf(data) == -1) // Test if the name is already taken
 		{
 			nameArray.push(data);
+
 			socket.nickname = data;
 			socket.emit('nameStatus', 'ok');
 			console.log("user " + data + " connected");
@@ -107,5 +112,8 @@ io.sockets.on('connection', function (socket) {
 		{
 			socket.emit('nameStatus', 'error') // Send the error
 		}
-	});
+	});	
+	// router.get('server', function(req, res){
+	// 	res.render('nameArray', {data: nameArray});
+	// });
 });

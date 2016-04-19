@@ -48,15 +48,20 @@ function setName() {
 		        $('#nameInput').hide();
 		        $('#nameSet').hide();
 		        $("#welcomeParagraph").show();
-		        $("#welcomeParagraph").append('<div class="Welcome"><p> Hello! Welcome ' + $("#nameInput").val() + '</p></div>');
+		        $("#welcomeParagraph").append('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to Emomix.</p></div>');     
+            // $("#userInRoom").show();
+            // for(i = 0; i < nameArray.length; i++){
+            //   $("#userInRoom").append(nameArray[i]);
+            // }
 			}
 			else
 			{
 				alert("Name Already Taken");
 				$('#nameForm').modal();
 			}
-		})
-    }
+		})  
+
+  }
 }
 
 socket.on('message', function(data) {
