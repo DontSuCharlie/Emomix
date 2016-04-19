@@ -5,6 +5,7 @@ html
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
         script(src="/socket.io/socket.io.js")
+        script(scr="server.js")
         script(src="script.js")
         script(src="jquery.modal.js")
         link(rel="stylesheet", href="style.css")
@@ -13,9 +14,14 @@ html
         div.container
             header
                 h1(align="center") Language Analysis Messaging App
+            p User in the room
+            - var value = ['hi', 'hello'];
+            ul
+              each val in value.length ? value:['There are no value']
+                li= val
             div#welcomeParagraph
             div.modal#nameForm
-                p Enter A Username:
+                p Enter a username:
                 input(type='text')#nameInput
                 button#nameSet Set Name
             div#chatEntries
