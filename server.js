@@ -4,17 +4,33 @@
 
 var cfenv = require('cfenv'); // for bluemix
 // run locally or on cloud
-var serverPort = (process.env.VCAP_APP_PORT || 3000);
-var host = (process.env.VCAP_APP_HOST || '0.0.0.0');
+var serverPort = (process.env.VCAP_APP_PORT || 27017);
+var host = (process.env.VCAP_APP_HOST || '127.0.0.1');
 
 var express = require('express'), app = express();
 var http = require('http')
   , server = http.createServer(app)
   , io = require('socket.io').listen(server)
   , watson = require('watson-developer-cloud');
+var mongodb = require('mongodb');
 var jade = require('jade');
 var nameArray = [''];
 var users = 0; //number of connected users
+
+
+//Initializing database
+var mongoClient = mongodb.MongoClient;
+//tries to create a connection to the database, if successful print success message
+//you have to run mongodb on its own, you can't just run it from javascript directly
+mongoClient.connect("mongodb://localhost:27017", function(err, db)
+	{
+		if(!err)
+			console.log("Connected to database");
+		else
+			console.log(err);
+	});
+
+
 
 // Using Jade
 
