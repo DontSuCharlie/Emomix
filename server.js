@@ -15,9 +15,9 @@ var http = require('http')
 var jade = require('jade');
 var nameArray = [];	// contain all name of user in the room
 var users = 0; //number of connected users
-var allUser = function(uName){
-	this.name = uName;
-};
+// var allUser = function(uName){
+// 	this.name = uName;
+// };
 
 
 // Using Jade
@@ -65,6 +65,8 @@ app.get('/settings', function(req, res){
 
 io.sockets.on('connection', function (socket) {
     // new connection
+    users += 1; // increment number of users 
+    reloadUsers(); 
 	socket.on('message', function (data) { // Broadcast the message
 		var transmit = {name : socket.nickname, message : data};
 		io.sockets.emit('message', transmit);
@@ -98,12 +100,12 @@ io.sockets.on('connection', function (socket) {
 
 		console.log("user "+ transmit['name'] +" said \""+data+"\"");
 	});
-	users += 1; // increment number of users 
+	
 	socket.on('setName', function (data) { // Assign a name to the user
+		reloadUsers();
 		if (nameArray.indexOf(data) == -1) // Test if the name is already taken
 		{
 			nameArray.push(data);
-
 			socket.nickname = data;
 			socket.emit('nameStatus', 'ok');
 			console.log("user " + data + " connected");
@@ -113,7 +115,10 @@ io.sockets.on('connection', function (socket) {
 			socket.emit('nameStatus', 'error') // Send the error
 		}
 	});	
-	// router.get('server', function(req, res){
-	// 	res.render('nameArray', {data: nameArray});
-	// });
+	
+
 });
+
+function reloadUsers() { // Send the count of the users to all
+	io.sockets.emit('nbUsers', {"nb": users});
+}

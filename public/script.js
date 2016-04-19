@@ -3,6 +3,7 @@ var socket = io.connect();
 // to see if user is typing
 var typing = false;
 var timeout = undefined;
+var userCount = 0;
 
 function timeoutFunction(){
   typing = false;
@@ -50,8 +51,10 @@ function setName() {
 		        $("#welcomeParagraph").show();
 		        $("#welcomeParagraph").append('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to Emomix.</p></div>');     
             // $("#userInRoom").show();
+            // div#userInRoom
             // for(i = 0; i < nameArray.length; i++){
-            //   $("#userInRoom").append(nameArray[i]);
+            //   ul
+            //     li=nameArray[i]
             // }
 			}
 			else
@@ -69,6 +72,12 @@ socket.on('message', function(data) {
     console.log(data);
     notifyMe(data['name'],data['message']);
 });
+
+socket.on('nbUsers', function(msg) {
+  console.log(msg.nb);
+  $("#nbUsers").html(msg.nb);
+});
+
 
 // push notifications 
 function notifyMe(user,message) {

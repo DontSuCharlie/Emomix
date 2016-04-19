@@ -14,11 +14,10 @@ html
         div.container
             header
                 h1(align="center") Language Analysis Messaging App
-            p User in the room
-            - var value = ['hi', 'hello'];
-            ul
-              each val in value.length ? value:['There are no value']
-                li= val
+            div#nbUsersDiv
+                p There are 
+                    span#nbUsers 
+                    |  user(s) in the room
             div#welcomeParagraph
             div.modal#nameForm
                 p Enter a username:
