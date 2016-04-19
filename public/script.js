@@ -43,7 +43,8 @@ function setName() {
 			if(data == "ok")
 			{
     				// user entered room -- make light colored
-    				socket.emit('message', "User " + $("#nameInput").val() + " entered the room");
+            // new channel for eneter room
+    				socket.emit('enteredRoom', "User " + $("#nameInput").val() + " entered the room");
     				// addMessage("User " + $("#nameInput").val() + " entered room", "Me");
 		        currentUser = $("#nameInput").val();
 		        $('#chatControls').show();

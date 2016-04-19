@@ -99,7 +99,14 @@ io.sockets.on('connection', function (socket) {
 
 		console.log("user "+ transmit['name'] +" said \""+data+"\"");
 	});
-	
+
+
+	socket.on('enteredRoom', function(data) {
+		var transmit = {name : socket.nickname, message : data};
+		socket.broadcast.emit('message', transmit);
+		console.log("user entered room");
+	});
+
 	socket.on('setName', function (data) { // Assign a name to the user
 		reloadUsers();
 		if (nameArray.indexOf(data) == -1) // Test if the name is already taken
