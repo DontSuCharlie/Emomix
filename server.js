@@ -6,7 +6,6 @@ var cfenv = require('cfenv'); // for bluemix
 // run locally or on cloud
 var serverPort = (process.env.VCAP_APP_PORT || 3000);
 var host = (process.env.VCAP_APP_HOST || '0.0.0.0');
-
 var express = require('express'), app = express();
 var http = require('http')
   , server = http.createServer(app)
