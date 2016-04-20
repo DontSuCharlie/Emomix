@@ -48,6 +48,10 @@ html, input {
     -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
+#nbUsersDiv {
+    margin: auto 300px;
+}
+
 header {
   font-family: 'Quicksand';
   padding: 50px 10px;
@@ -74,3 +78,16 @@ h1 {
     color: #00b0ff;
 }
 
+.container {
+  width: 850px;
+  margin: 50px auto;
+  overflow: hidden;
+}
+
+footer {
+  width: 500px;
+  margin: 50px auto;
+  border-top: 1px dotted #ccc;
+  padding-top: 5px;
+  font-size: 13px;
+}
