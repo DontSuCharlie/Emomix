@@ -24,23 +24,56 @@ html, input {
     display: none;
 }
 
+#nameInput
+{
+    background: #333;
+    color: #ccc;
+    width: 150px;
+    padding: 6px 15px 6px 35px;
+    transition: 500ms all ease;
+    border: 1px solid #333;
+}
+
+#nameInput:hover
+{
+    box-shadow: 12px 13px 0px rgba(204, 211, 51, 0.38),
+    -11px -14px 0px rgba(241, 96, 0, 0.28),
+    18px -24px 0px rgba(0, 0, 0, 0.34),
+    33px -6px 0px rgba(39, 74, 214, 0.28);
+}
+
+#left {
+  float: left;
+  width: 35%;
+  height: 100%;
+  /*border: 1px solid #e6e6e6;;*/
+  background-color: #fff;
+}
+
+#right {
+  position: relative;
+  float: left;
+  width: 65%;
+  height: 100%;
+}
+
 #messageInput {
-	width: 90%;
+	width: 85%;
 	margin-left: 2px;
 	height: 20px;
-    border-radius:40px
+  border-radius:40px
 }
 
 #submit {
-	width:8%;
-    height: 26px;
+	width:12%;
+  height: 26px;
 	margin-left: 4px;
-    font-size: 90%;
-    color: #00b0ff;
-    background-color: #FFFFFF;
-    -webkit-border-radius:40px;
-    -moz-border-radius:40px;
-    border-radius:40px;
+  font-size: 90%;
+  color: #00b0ff;
+  background-color: #FFFFFF;
+  -webkit-border-radius:40px;
+  -moz-border-radius:40px;
+  border-radius:40px;
 }
 
 #chatEntries {
@@ -57,11 +90,28 @@ html, input {
 }
 
 #nbUsersDiv {
-    margin: auto 300px;
+    margin: 40px auto;
 }
 
 #txt {
-    margin: auto 370px;
+    margin: 40px auto;
+}
+
+#nameSearch {
+    float: left;
+    width: 188px;
+    height: 42px;
+    padding: 0 15px;
+    border: 1px solid $light;
+    background-color: #eceff1;
+    border-radius:40px;
+}
+
+#search {
+  width: 50px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #00b0ff;
 }
 
 header {
@@ -88,6 +138,36 @@ h1 {
     border-radius: 2px 2px 0px 0px;
     margin-bottom: 10px;
     color: #00b0ff;
+}
+
+.myButton {
+    margin-left: 28px;
+    background-color:#44c767;
+    -moz-border-radius:28px;
+    -webkit-border-radius:28px;
+    border-radius:28px;
+    border:1px solid #18ab29;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:14px;
+    padding:6px 10px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+}
+
+.myButton:hover {
+    background-color:#5cbf2a;
+}
+
+.myButton:active {
+    position:relative;
+    top:1px;
+}
+
+.userNamePara {
+    font-size:20px;
 }
 
 .container {
