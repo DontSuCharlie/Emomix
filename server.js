@@ -64,8 +64,6 @@ app.get('/settings', function(req, res){
 
 io.sockets.on('connection', function (socket) {
     // new connection
-    users += 1; // increment number of users 
-    reloadUsers(); 
 	socket.on('message', function (data) { // Broadcast the message
 		var transmit = {name : socket.nickname, message : data};
 		io.sockets.emit('message', transmit);
@@ -108,6 +106,8 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('setName', function (data) { // Assign a name to the user
+		console.log("NAME 2 SET");
+		users += 1;
 		reloadUsers();
 		if (nameArray.indexOf(data) == -1) // Test if the name is already taken
 		{
@@ -121,8 +121,17 @@ io.sockets.on('connection', function (socket) {
 			socket.emit('nameStatus', 'error') // Send the error
 		}
 	});	
-	
-
+	socket.on('disconnect', function () { // Disconnection of the client
+		// sent by socket io automatically 
+		var name;
+		name = socket.nickname;
+		var index = nameArray.indexOf(name);
+		if(index != -1) { // make sure the name exists
+			name.slice(index - 1, 1);
+			users -= 1;
+			reloadUsers();
+		}
+	});
 });
 
 function reloadUsers() { // Send the count of the users to all

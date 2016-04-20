@@ -37,9 +37,10 @@ function sendMessage() {
 function setName() {
     if ($("#nameInput").val() != "")
     {
+      console.log("NAME ONCE SET");
     	$.modal.close();
     	socket.emit('setName', $("#nameInput").val());
-        socket.on('nameStatus', function(data){
+      socket.on('nameStatus', function(data){
 			if(data == "ok")
 			{
     				// user entered room -- make light colored
