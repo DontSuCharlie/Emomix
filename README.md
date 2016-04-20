@@ -13,6 +13,12 @@ We'll be using
 5. IBM Bluemix  
 6. IBM Watson Tone Analyzer API  
 
+Features:
+
+1. Chat
+2. Notifications
+3. Emotion analysis
+
 ## The Team
 
 Charlie Su (charliesu@purdue.edu)  

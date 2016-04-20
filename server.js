@@ -4,9 +4,8 @@
 
 var cfenv = require('cfenv'); // for bluemix
 // run locally or on cloud
-var serverPort = (process.env.VCAP_APP_PORT || 27017);
-var host = (process.env.VCAP_APP_HOST || '127.0.0.1');
-
+var serverPort = (process.env.VCAP_APP_PORT || 3000);
+var host = (process.env.VCAP_APP_HOST || '0.0.0.0');
 var express = require('express'), app = express();
 var http = require('http')
   , server = http.createServer(app)
@@ -16,9 +15,9 @@ var mongodb = require('mongodb');
 var jade = require('jade');
 var nameArray = [];	// contain all name of user in the room
 var users = 0; //number of connected users
-var allUser = function(uName){
-	this.name = uName;
-};
+// var allUser = function(uName){
+// 	this.name = uName;
+// };
 
 
 
@@ -114,12 +113,21 @@ io.sockets.on('connection', function (socket) {
 
 		console.log("user "+ transmit['name'] +" said \""+data+"\"");
 	});
-	users += 1; // increment number of users 
+
+
+	socket.on('enteredRoom', function(data) {
+		var transmit = {name : socket.nickname, message : data};
+		socket.broadcast.emit('message', transmit);
+		console.log("user entered room");
+	});
+
 	socket.on('setName', function (data) { // Assign a name to the user
+		console.log("NAME 2 SET");
+		users += 1;
+		reloadUsers();
 		if (nameArray.indexOf(data) == -1) // Test if the name is already taken
 		{
 			nameArray.push(data);
-
 			socket.nickname = data;
 			socket.emit('nameStatus', 'ok');
 			console.log("user " + data + " connected");
@@ -129,7 +137,19 @@ io.sockets.on('connection', function (socket) {
 			socket.emit('nameStatus', 'error') // Send the error
 		}
 	});	
-	// router.get('server', function(req, res){
-	// 	res.render('nameArray', {data: nameArray});
-	// });
+	socket.on('disconnect', function () { // Disconnection of the client
+		// sent by socket io automatically 
+		var name;
+		name = socket.nickname;
+		var index = nameArray.indexOf(name);
+		if(index != -1) { // make sure the name exists
+			name.slice(index - 1, 1);
+			users -= 1;
+			reloadUsers();
+		}
+	});
 });
+
+function reloadUsers() { // Send the count of the users to all
+	io.sockets.emit('nbUsers', {"nb": users});
+}
