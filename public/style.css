@@ -52,6 +52,10 @@ html, input {
     margin: auto 300px;
 }
 
+#txt {
+    margin: auto 370px;
+}
+
 header {
   font-family: 'Quicksand';
   padding: 50px 10px;
