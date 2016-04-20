@@ -24,23 +24,37 @@ html, input {
     display: none;
 }
 
+#left {
+  float: left;
+  width: 35%;
+  height: 100%;
+  /*border: 1px solid #e6e6e6;;*/
+  background-color: #fff;
+}
+#right {
+  position: relative;
+  float: left;
+  width: 65%;
+  height: 100%;
+}
+
 #messageInput {
-	width: 90%;
+	width: 85%;
 	margin-left: 2px;
 	height: 20px;
-    border-radius:40px
+  border-radius:40px
 }
 
 #submit {
-	width:8%;
-    height: 26px;
+	width:12%;
+  height: 26px;
 	margin-left: 4px;
-    font-size: 90%;
-    color: #00b0ff;
-    background-color: #FFFFFF;
-    -webkit-border-radius:40px;
-    -moz-border-radius:40px;
-    border-radius:40px;
+  font-size: 90%;
+  color: #00b0ff;
+  background-color: #FFFFFF;
+  -webkit-border-radius:40px;
+  -moz-border-radius:40px;
+  border-radius:40px;
 }
 
 #chatEntries {
@@ -61,7 +75,24 @@ html, input {
 }
 
 #txt {
-    margin: auto 370px;
+    margin: 40px auto;
+}
+
+#nameSearch {
+    float: left;
+    width: 188px;
+    height: 42px;
+    padding: 0 15px;
+    border: 1px solid $light;
+    background-color: #eceff1;
+    border-radius:40px;
+}
+
+#search {
+  width: 50px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #00b0ff;
 }
 
 header {

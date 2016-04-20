@@ -27,25 +27,30 @@ html
                 if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
                 return i;
             }
+
     body(onload="startTime();")
         div.container
             header
                 h1(align="center") Language Analysis Messaging App
             
             div#welcomeParagraph
+            div#left
+                div#top
+                    input(type='text')#nameSearch
+                    button#search Search
             div.modal#nameForm
                 p Enter a username:
                 input(type='text')#nameInput
                 button#nameSet Set Name
-            div#chatEntries
-            div#chatControls
-                input(type='text')#messageInput
-                button#submit Send
-            div#nbUsersDiv
-                p There are 
-                    span#nbUsers 
-                    |  user(s) in the room
-            #txt
+            div#right
+                div#chatEntries
+                div#chatControls
+                    input(type='text')#messageInput
+                    button#submit Send
+                div#nbUsersDiv
+                    p There are 
+                        span#nbUsers 
+                        |  user(s) in the room
             footer
                 p Modify by Tarang Khanna, Charlie Su, Junming Guo
 
