@@ -4,6 +4,7 @@ var socket = io.connect();
 var typing = false;
 var timeout = undefined;
 var userCount = 0;
+var currentUser = '';
 
 function timeoutFunction(){
   typing = false;
@@ -36,15 +37,17 @@ function sendMessage() {
 function setName() {
     if ($("#nameInput").val() != "")
     {
+      console.log("NAME ONCE SET");
     	$.modal.close();
     	socket.emit('setName', $("#nameInput").val());
-        socket.on('nameStatus', function(data){
+      socket.on('nameStatus', function(data){
 			if(data == "ok")
 			{
-				// user entered room -- make light colored
-				socket.emit('message', "User " + $("#nameInput").val() + " entered the room");
-				// addMessage("User " + $("#nameInput").val() + " entered room", "Me"); 
-		        
+    				// user entered room -- make light colored
+    				socket.emit('enteredRoom', "User " + $("#nameInput").val() + " entered the room");
+
+    				// addMessage("User " + $("#nameInput").val() + " entered room", "Me"); 
+    		    currentUser = $("#nameInput").val();
 		        $('#chatControls').show();
 		        $('#nameInput').hide();
 		        $('#nameSet').hide();
@@ -68,46 +71,48 @@ socket.on('message', function(data) {
 });
 
 socket.on('nbUsers', function(msg) {
-  console.log(msg.nb);
-  $("#nbUsers").html(msg.nb);
+    console.log(msg.nb);
+    $("#nbUsers").html(msg.nb);
 });
 
 
 // push notifications 
 function notifyMe(user,message) {
-  // Let's check if the browser supports notifications
-  if (!("Notification" in window)) {
-    alert("This browser does not support desktop notification");
+  if(currentUser != user) { // do not notify user sending the message ofc
+    // Let's check if the browser supports notifications
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    }
+    // Let's check if the user is okay to get some notification
+    else if (Notification.permission === "granted") {
+      // If okay let's create a notification
+    var options = {
+          body: message,
+          dir : "ltr"
+      };
+    var notification = new Notification(user + " Sent a message",options);
+    }
+    // Otherwise, we need to ask the user for permission
+    // Note, Chrome does not implement the permission static property
+    // So we have to check for NOT 'denied' instead of 'default'
+    else if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        // Whatever the user answers, we make sure we store the information
+        if (!('permission' in Notification)) {
+          Notification.permission = permission;
+        }
+        // If the user is okay, let's create a notification
+        if (permission === "granted") {
+          var options = {
+                  body: message,
+                  dir : "ltr"
+          };
+          var notification = new Notification(user + " Sent a message",options);
+        }
+      });
+    }
+    // Do nothing if user denies notification
   }
-  // Let's check if the user is okay to get some notification
-  else if (Notification.permission === "granted") {
-    // If okay let's create a notification
-  var options = {
-        body: message,
-        dir : "ltr"
-    };
-  var notification = new Notification(user + " Sent a message",options);
-  }
-  // Otherwise, we need to ask the user for permission
-  // Note, Chrome does not implement the permission static property
-  // So we have to check for NOT 'denied' instead of 'default'
-  else if (Notification.permission !== 'denied') {
-    Notification.requestPermission(function (permission) {
-      // Whatever the user answers, we make sure we store the information
-      if (!('permission' in Notification)) {
-        Notification.permission = permission;
-      }
-      // If the user is okay, let's create a notification
-      if (permission === "granted") {
-        var options = {
-                body: message,
-                dir : "ltr"
-        };
-        var notification = new Notification(user + " Sent a message",options);
-      }
-    });
-  }
-  // Do nothing if user denies notification
 }
 
 // init
