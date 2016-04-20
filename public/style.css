@@ -28,11 +28,19 @@ html, input {
 	width: 90%;
 	margin-left: 2px;
 	height: 20px;
+    border-radius:40px
 }
 
 #submit {
-	width:7%;
+	width:8%;
+    height: 26px;
 	margin-left: 4px;
+    font-size: 90%;
+    color: #00b0ff;
+    background-color: #FFFFFF;
+    -webkit-border-radius:40px;
+    -moz-border-radius:40px;
+    border-radius:40px;
 }
 
 #chatEntries {
