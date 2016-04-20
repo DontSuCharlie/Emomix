@@ -3,7 +3,6 @@ var socket = io.connect();
 // to see if user is typing
 var typing = false;
 var timeout = undefined;
-var currentUser = '';
 var userCount = 0;
 
 function timeoutFunction(){
@@ -11,7 +10,7 @@ function timeoutFunction(){
   socket.emit("typing", false);
 }
 
-socket.on("isTyping", function(data) {
+socket.on("isTyping", function(data) {  
   if (data.isTyping) {
     if ($("#"+data.person+"").length === 0) {
       $("#updates").append("<li id='"+ data.person +"'><span class='text-muted'><small><i class='fa fa-keyboard-o'></i>" + data.person + " is typing.</small></li>");
@@ -27,7 +26,7 @@ function addMessage(msg, name) {
 }
 
 function sendMessage() {
-    if ($('#messageInput').val() != "")
+    if ($('#messageInput').val() != "") 
     {
         socket.emit('message', $('#messageInput').val());
         // addMessage($('#messageInput').val(), "Me"); // replace Me with current user
@@ -42,29 +41,22 @@ function setName() {
         socket.on('nameStatus', function(data){
 			if(data == "ok")
 			{
-    				// user entered room -- make light colored
-            // new channel for eneter room
-    				socket.emit('enteredRoom', "User " + $("#nameInput").val() + " entered the room");
-    				// addMessage("User " + $("#nameInput").val() + " entered room", "Me");
-		        currentUser = $("#nameInput").val();
+				// user entered room -- make light colored
+				socket.emit('message', "User " + $("#nameInput").val() + " entered the room");
+				// addMessage("User " + $("#nameInput").val() + " entered room", "Me"); 
+		        
 		        $('#chatControls').show();
 		        $('#nameInput').hide();
 		        $('#nameSet').hide();
 		        $("#welcomeParagraph").show();
-		        $("#welcomeParagraph").append('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to Emomix.</p></div>');
-            // $("#userInRoom").show();
-            // div#userInRoom
-            // for(i = 0; i < nameArray.length; i++){
-            //   ul
-            //     li=nameArray[i]
-            // }
+		        $("#welcomeParagraph").append('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to Emomix.</p></div>');     
 			}
 			else
 			{
 				alert("Name Already Taken");
 				$('#nameForm').modal();
 			}
-		})
+		})  
 
   }
 }
@@ -72,10 +64,7 @@ function setName() {
 socket.on('message', function(data) {
     addMessage(data['message'], data['name']);
     console.log(data);
-    console.log("Current user is" + currentUser)
-    if(currentUser != data['name']) {
-      notifyMe(data['name'],data['message']);
-    }
+    notifyMe(data['name'],data['message']);
 });
 
 socket.on('nbUsers', function(msg) {
@@ -83,6 +72,8 @@ socket.on('nbUsers', function(msg) {
   $("#nbUsers").html(msg.nb);
 });
 
+
+// push notifications 
 function notifyMe(user,message) {
   // Let's check if the browser supports notifications
   if (!("Notification" in window)) {

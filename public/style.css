@@ -48,11 +48,29 @@ html, input {
     -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
-#nameSet {
-
+header {
+  font-family: 'Quicksand';
+  padding: 50px 10px;
+  color: #fff;
+  font-size: 25px;
+  text-align: center;
+/*
+   * Note the use of the `main-color`
+   * variable and the `darken` function
+   */
+  background-color: #000000;
+  border-bottom: 1px solid #df1806;
+  text-shadow: 0px -1px 0px #df1806;
 }
 
 h1 {
+    font-family: 'Quicksand';
+    margin: 13px 10px 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #ddd;
+    -webkit-border-radius: 2px 2px 0px 0px;
+    border-radius: 2px 2px 0px 0px;
+    margin-bottom: 10px;
     color: #00b0ff;
 }
 
