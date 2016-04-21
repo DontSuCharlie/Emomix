@@ -58,7 +58,7 @@ html, input {
 }
 
 #messageInput {
-	width: 85%;
+	width: 98%;
 	margin-left: 2px;
 	height: 20px;
     border-radius:40px
@@ -178,6 +178,10 @@ footer {
   font-size: 13px;
 }
 
+*:focus {
+    outline: none;
+}
+
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -188,4 +192,3 @@ body {
     position: relative;
     margin-left: 650px;
 }
-
