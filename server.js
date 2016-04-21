@@ -11,28 +11,13 @@ var http = require('http')
   , server = http.createServer(app)
   , io = require('socket.io').listen(server)
   , watson = require('watson-developer-cloud');
-var mongodb = require('mongodb');
 var jade = require('jade');
+var db = require('./database.js');
 var nameArray = [];	// contain all name of user in the room
 var users = 0; //number of connected users
 // var allUser = function(uName){
 // 	this.name = uName;
 // };
-
-
-
-//Initializing database
-var mongoClient = mongodb.MongoClient;
-//tries to create a connection to the database, if successful print success message
-//you have to run mongodb on its own, you can't just run it from javascript directly
-mongoClient.connect("mongodb://localhost:27017", function(err, db)
-	{
-		if(!err)
-			console.log("Connected to database");
-		else
-			console.log(err);
-	});
-
 
 
 // Using Jade
@@ -45,6 +30,7 @@ server.listen(serverPort, host, function() {
   console.log("server starting on " + host + ":" + serverPort);
 });
 
+db.test();
 
 app.set('views', __dirname + '/public');
 app.set('view engine', 'jade');
