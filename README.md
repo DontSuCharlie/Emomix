@@ -18,6 +18,8 @@ Features:
 1. Chat
 2. Notifications
 3. Emotion analysis
+4. Who is typing
+5. Users in room
 
 ## The Team
 
