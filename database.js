@@ -63,7 +63,16 @@ The chat rooms will also hold the chat messages
 */
 
 module.exports = {
-	test: test
+	test: test,
+	signup: signup,
+	/*
+	signin: signin,
+	createChatRoom: createChatRoom,
+	addUsersToChatRoom: addUsersToChatRoom,
+	enterChatRoom: enterChatRoom,
+	removeChatRoom: removeChatRoom,
+	searchUsers: searchUsers,
+	sendMessage: sendMessage*/
 };
 
 var Firebase = require("firebase");
@@ -75,7 +84,8 @@ var myRooms;
 
 function test()
 {
-	console.log("test worked!");
+	console.log("database module is connected!");
+	firebase_ref.push({name: "Charlie", password: null});
 }
 
 function queryForUser(snapshot)
@@ -160,7 +170,7 @@ function addUsersToChatRoom(users)
 	c) Search for the ID of the new room
 	d) Load the new room's info + all messages
 */
-function useChatRoom(name_of_room)
+function enterChatRoom(name_of_room)
 {
 	//remove previous callback
 	firebase_ref.off("child_added", onCallback);
