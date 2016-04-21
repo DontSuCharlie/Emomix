@@ -24,9 +24,9 @@ socket.on("isTyping", function(data) {
 
 function addMessage(msg, name) {
     if(currentUser != name) {
-      $("#chatEntries").append('<div class="message"><p>' + name + ' : ' + msg + '</p></div>');
+      $("#chatEntries").append('<div class="message"><p>' + name + ' : ' + msg + '</p></div> <div class="clear"></div>');
     } else {
-      $("#chatEntries").append('<div class="messageSelf"><p>' + name + ' : ' + msg + '</p></div>');
+      $("#chatEntries").append('<div class="messageSelf"><p>' + name + ' : ' + msg + '</p></div> <div class="clear"></div>');
     }
 }
 
