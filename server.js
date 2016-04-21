@@ -107,6 +107,11 @@ io.sockets.on('connection', function (socket) {
 		console.log("user entered room");
 	});
 
+	socket.on("typing", function(data) {  
+		console.log(data);
+   		io.sockets.emit("isTyping", {isTyping: data.isTyping, person: data.person});
+	});
+
 	socket.on('setName', function (data) { // Assign a name to the user
 		if (nameArray.indexOf(data) == -1) // Test if the name is already taken
 		{

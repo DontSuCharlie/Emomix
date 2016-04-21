@@ -8,13 +8,15 @@ var currentUser = '';
 
 function timeoutFunction(){
   typing = false;
-  socket.emit("typing", false);
+  socket.emit("typing", {isTyping: false, person: currentUser});
 }
 
 socket.on("isTyping", function(data) {  
+  console.log("typing");
+  console.log(data);
   if (data.isTyping) {
     if ($("#"+data.person+"").length === 0) {
-      $("#updates").append("<li id='"+ data.person +"'><span class='text-muted'><small><i class='fa fa-keyboard-o'></i>" + data.person + " is typing.</small></li>");
+      $("#updates").append("<li id='"+ data.person +"'><span class='text-muted'><small><i class='fa fa-keyboard-o'></i>" + data.person + " is typing...</small></li>");
       timeout = setTimeout(timeoutFunction, 5000);
     }
   } else {
@@ -132,7 +134,7 @@ $(function() {
 	 	 if (e.which !== 13) {
 		    if (typing === false && $("#messageInput").is(":focus")) {
 		      typing = true;
-		      socket.emit("typing", true);
+		      socket.emit("typing", {isTyping: true, person: currentUser});
 		    } else {
 		      clearTimeout(timeout);
 		      timeout = setTimeout(timeoutFunction, 5000);
