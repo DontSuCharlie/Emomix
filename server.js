@@ -106,15 +106,15 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('setName', function (data) { // Assign a name to the user
-		console.log("NAME 2 SET");
-		users += 1;
-		reloadUsers();
 		if (nameArray.indexOf(data) == -1) // Test if the name is already taken
 		{
 			nameArray.push(data);
 			socket.nickname = data;
 			socket.emit('nameStatus', 'ok');
+			users += 1; // only increment when name is not taken
+			reloadUsers();
 			console.log("user " + data + " connected");
+
 		}
 		else
 		{
