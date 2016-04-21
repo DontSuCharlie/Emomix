@@ -56,7 +56,7 @@ function setName() {
 		        $('#nameInput').hide();
 		        $('#nameSet').hide();
 		        $("#welcomeParagraph").show();
-		        $("#welcomeParagraph").append('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to Emomix.</p></div>');     
+		        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to Emomix.</p></div>');     
 			}
 			else
 			{
