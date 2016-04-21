@@ -40,6 +40,7 @@ function sendMessage() {
         $('#messageInput').val(''); // clear
     }
 }
+
 function setName() {
     if ($("#nameInput").val() != "")
     {
@@ -58,7 +59,8 @@ function setName() {
 		        $('#nameInput').hide();
 		        $('#nameSet').hide();
 		        $("#welcomeParagraph").show();
-		        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to Emomix.</p></div>');     
+		        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to Emomix.</p></div>');   
+            // $("#userName").html('<div class="User in room"><p> ' + $("#nameInput").val() + '</p></div>');  
 			}
 			else
 			{
@@ -81,6 +83,10 @@ socket.on('nbUsers', function(msg) {
     $("#nbUsers").html(msg.nb);
 });
 
+socket.on('userName', function(msg){
+    $("#userName").html(msg.un); 
+});
+
 
 // push notifications 
 function notifyMe(user,message) {
@@ -92,11 +98,11 @@ function notifyMe(user,message) {
     // Let's check if the user is okay to get some notification
     else if (Notification.permission === "granted") {
       // If okay let's create a notification
-    var options = {
+      var options = {
           body: message,
           dir : "ltr"
       };
-    var notification = new Notification(user + " Sent a message",options);
+      var notification = new Notification(user + " Sent a message",options);
     }
     // Otherwise, we need to ask the user for permission
     // Note, Chrome does not implement the permission static property
