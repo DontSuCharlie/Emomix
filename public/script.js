@@ -23,7 +23,11 @@ socket.on("isTyping", function(data) {
 });
 
 function addMessage(msg, name) {
-    $("#chatEntries").append('<div class="message"><p>' + name + ' : ' + msg + '</p></div>');
+    if(currentUser != name) {
+      $("#chatEntries").append('<div class="message"><p>' + name + ' : ' + msg + '</p></div> <div class="clear"></div>');
+    } else {
+      $("#chatEntries").append('<div class="messageSelf"><p>' + name + ' : ' + msg + '</p></div> <div class="clear"></div>');
+    }
 }
 
 function sendMessage() {
@@ -118,6 +122,10 @@ function notifyMe(user,message) {
 // init
 
 $(function() {
+    $('html, body').css({
+      'overflow': 'hidden',
+      'height': '100%'
+    });
     $("#chatControls").hide();
     $("#messageInput").keypress(function(e) {
 		// alert("typing");

@@ -30,8 +30,6 @@ html
 
     body(onload="startTime();")
         div.container
-            header
-                h1(align="center") Language Analysis Messaging App
             div#welcomeParagraph
             div#left
                 div#top
@@ -44,10 +42,11 @@ html
                 button.myButton#nameSet Set Name
             div#right
                 #txt
-                div#chatEntries
+                div#chatEntries.chat
+                    div#chatEntriesright
                 div#chatControls
                     input(type='text')#messageInput
-                    button#submit Send
+                    
                 div#nbUsersDiv
                     p There are 
                         span#nbUsers 
