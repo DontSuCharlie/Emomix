@@ -65,9 +65,9 @@ The chat rooms will also hold the chat messages
 module.exports = {
 	test: test,
 	signup: signup,
-	/*
 	signin: signin,
 	createChatRoom: createChatRoom,
+	/*
 	addUsersToChatRoom: addUsersToChatRoom,
 	enterChatRoom: enterChatRoom,
 	removeChatRoom: removeChatRoom,
@@ -77,14 +77,15 @@ module.exports = {
 
 var Firebase = require("firebase");
 //Pointer to Firebase (needs to update if we move to a different object)
-var firebase_url = "https://emomix.firebaseIO.com";
+var firebase_url = "https://emomix.firebaseIO.com/roomlist";
 var username = "none";
 var firebase_ref = new Firebase(firebase_url);
+var userlist_ref = new Firebase("https://emomix.firebaseio.com/userlist");
+var roomlist_ref = new Firebase("https://emomix.firebaseio.com/roomlist");
 var myRooms;
 
 function test()
 {
-
 	//var test1 = "Charlie";
 	//var test2 = "password";
 	//var test3 = [];
@@ -92,7 +93,7 @@ function test()
 	//var newUser = new Object;
 	//newUser[test1] = {password: test2, rooms: test3};
 	//var id = firebase_ref.child("userlist").set(newUser);
-	var searchName = new Firebase("https://emomix.firebaseio.com/userlist/Charlie").once('value', queryForUser);
+	var searchName = new Firebase("https://emomix.firebaseio.com/userlist").once('value', queryForUser);
 	if(searchName == null)
 		console.log("2: user not found");
 	else
@@ -102,19 +103,22 @@ function test()
 function queryForUser(snapshot)
 {
 	console.log("1: snapshot.val = " + snapshot.val());
+	var snap = snapshot.val();
+	var char = snap["Charlie"];
+	var pass = char["password"];
+	console.log("1.1: snapshot.child.val = " + pass);
 	return snapshot.val();
 }
 
 /*
 1. Create account
-	a) Check if username is already taken, if so, return error
-	b) If username is not taken, .push() the new user into list
+	a) Check if username is already taken, if so, return false
+	b) If username is not taken, add the new user into list and then return true
 Pet Peeve #1 with Javascript: The only way to prevent asynchrony is with callbacks. Let's say I have a function that does two actions where the second
 action is dependent on the first. The only way to guarantee it is to turn both actions into functions and then chain them together. Talk about unnecessary overuse of the stack!
 */
 function signup(username, password)
 {
-	var userlist_ref = new Firebase("https://emomix.firebaseio.com/userlist");
 	return userlist_ref.once('value', function(snapshot)
 	{
 		//first check if the username exists
@@ -145,29 +149,90 @@ function signup(username, password)
 */
 function signin(username, password)
 {
-	//first check if the username exists
-	var search = new Firebase(firebase_url + "/emomix/" + username).once('value', queryForUser);
-	//password matching doesn't matter atm
-	if(username == search.name)
+	userlist_ref.once("value", function(snapshot)
 	{
-		var numRooms = search.rooms.length();
-		for (var i = 0; i < numRooms; i++) {
-			myRooms.push(search.rooms[i]);
+		//if the username exists
+		if(snapshot.child(username).exists())
+		{
+			//extracts fields from object
+			var user = snapshot.val();
+			user = user[username];
+			//check pass
+			if(password == user["password"])
+			{
+				console.log("password" + password + "==" + user["password"]);
+				//extract room array then push it to the myRooms global variable
+				//might want to make myRooms
+				var roomArr = user["rooms"];
+				if(roomArr != undefined)
+				{
+					var numRooms = roomArr.length;
+					for(var i = 0; i < numRooms; i++)
+					{
+						myRooms.push(roomArr[i]);
+					}
+					return "success";
+				}
+				return "no rooms";
+			}
+			else
+			{
+				console.log("password" + password + "!=" + user["password"]);				
+				return "invalid password";
+			}
 		}
-	}
+		else
+		{
+			console.log("username not found");
+			return "username not found";
+		}
+	});
 }
 /*
 3. Create new room
-	a) Go to the current user's room[] and push() the new room
-	b) 
+	a) Create new room in database
+	b) Also go to the current user's room[] and push() the new room
+
+	Room_Info{
+		room name
+		room emotion
+	}
+
+	Message{
+		sender name
+		sender message
+		sender emotion
+		sender date
+	}
 */
-function createChatRoom(name_of_room)
+function createChatRoom(username, name_of_room)
 {
-	//get user's room
-	var search = new Firebase(firebase_url + "/emomix/" + username).once('value', queryForUser);
-	var chatRooms = new Firebase(firebase_url + "/emomix/" + username + "/" + chatRooms.room);
-	chatRooms.push(name_of_room);
-	//insert room itself into user's room array
+	createChatRoomCallback(firebase_ref.push({
+		Meta:{
+			name: name_of_room,
+			emotion: "Neutral",
+			count: 0
+		},
+		Messages:{
+			"0":{
+				name: "Watson",
+				message: "Welcome!",
+				emotion: "Happy",
+				date: new Date().getTime()
+			}
+		}
+	}), username, name_of_room);
+}
+
+function createChatRoomCallback(new_ref, username, name_of_room)
+{
+	//get user's room field and add to it
+	var room_ID = new_ref["path"];
+	room_ID = room_ID["u"];
+	console.log(room_ID[1]);
+	room_ID = room_ID[1];
+	//console.log(firebase_url + "/userlist/" + username + "/rooms/" + room_ID);
+	new Firebase(userlist_ref + "/" + username + "/rooms/" + room_ID).set(name_of_room);		
 }
 
 /*

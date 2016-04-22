@@ -26,8 +26,10 @@ server.listen(serverPort, host, function() {
   console.log("server starting on " + host + ":" + serverPort);
 });
 
-console.log(db.signup("Charlie", "ilikepie"));
-//db.test();
+db.signup("Charlie", "ilikepie");
+db.signin("Charlie", "ilikepie");
+db.createChatRoom("Charlie", "CS Majors Only");
+db.test();
 
 app.set('views', __dirname + '/public');
 app.set('view engine', 'jade');
