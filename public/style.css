@@ -189,8 +189,11 @@ body {
 #welcomeParagraph {
     /*color:#00b0ff;*/
     color: #FFFFFF;
-    font-weight: bold;
-    font-size: 110%;
+    font-family: 'Rancho', serif;
+    /*font-weight: bold;*/
+    font-size: 170%;
+    margin: 1%;
+    margin-bottom: -3%;
 }
 
 #lean_overlay {
@@ -237,7 +240,7 @@ body {
   float: right;
   height: 100%;
   /*background-color: #fff;*/
-  margin-top: 5.5%;
+  margin-top: 3%;
   margin-right: 10%;
 }
 
@@ -258,6 +261,7 @@ body {
     width: 71.5%;
     height: 3%;
     border: none;
+    font-size: 17px;
     margin-top: 32.5%;
     margin-left: 1%;
     border-bottom: 2px solid blue;
