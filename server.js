@@ -15,7 +15,6 @@ var jade = require('jade');
 var db = require('./database.js');
 var nameArray = [];	// contain all name of user in the room
 var users = 0; //number of connected users
-var name;
 
 // Using Jade
 
@@ -120,8 +119,6 @@ io.sockets.on('connection', function (socket) {
 			users += 1; // only increment when name is not taken
 			reloadUsers();
 			reloadUsersName();
-			console.log("user " + data + " connected");
-
 		}
 		else
 		{
@@ -149,3 +146,4 @@ function reloadUsers() { // Send the count of the users to all
 function reloadUsersName() {
 	io.sockets.emit('userName', {"un": name});
 }
+
