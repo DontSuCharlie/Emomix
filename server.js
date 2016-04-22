@@ -127,7 +127,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on("typing", function(data) {  
-		console.log(data);
+		// console.log(data);
    		io.sockets.emit("isTyping", {isTyping: data.isTyping, person: data.person});
 	});
 

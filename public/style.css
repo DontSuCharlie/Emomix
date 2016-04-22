@@ -45,10 +45,10 @@ header {
 }
 
 footer {
-  width: 500px;
-  margin: 50px auto;
+  width: 20%;
+  margin: 1% auto;
   border-top: 1px dotted #ccc;
-  padding-top: 2px;
+  /*padding-top: px;*/
   font-size: 13px;
 }
 
@@ -78,11 +78,11 @@ body {
 
 }
 
-.container {
-    width: 750px;
+/*.container {
+    
     height: auto;
     margin-left: 250px;
-}
+}*/
 
 .myButton:hover {
     background-color:#5cbf2a;
@@ -233,21 +233,12 @@ body {
 }
 
 #right {
-  width: 100px;
+  width: 15%;
   float: right;
   height: 100%;
   /*background-color: #fff;*/
-  margin-top: 80px;
-  margin-right: 300px;
-}
-
-#messageInput {
-	width: 750px;
-	height: 22px;
-    border: none;
-    margin: auto;
-    border-bottom: 2px solid blue;
-    border-radius:2px;
+  margin-top: 5.5%;
+  margin-right: 10%;
 }
 
 #submit {
@@ -262,13 +253,24 @@ body {
     border-radius:40px;
 }
 
+#messageInput {
+    position: absolute;
+    width: 71.5%;
+    height: 3%;
+    border: none;
+    margin-top: 32.5%;
+    margin-left: 1%;
+    border-bottom: 2px solid blue;
+    border-radius: 2px;
+}
+
 #chatEntries {
-    /*position:relative;*/
-    width: 730px;
-    margin: 15px auto;
-    min-height: 450px;
-    max-height: 450px;
-    /*height: 70%;*/
+    position:absolute;
+    width: 70%;
+    margin: 1%;
+    /*min-height: 450px;
+    max-height: 450px;*/
+    height: 50%;
     overflow-y:scroll;
     padding: 10px;
     border: 1px solid rgba(0,0,0,0.1);
@@ -278,8 +280,9 @@ body {
 }
 
 #nbUsersDiv {
-    margin: 40px auto;
-    width: 500px;
+    margin: 46px auto;
+    width: 20%;
+    margin-top: 38%;
 }
 
 #nameSearch {
@@ -299,7 +302,6 @@ body {
   background-color: #00b0ff;
 }
 
-
 #createRoom {
     width: 100px;
     height: 30px;
@@ -313,9 +315,3 @@ body {
     position: relative;
     margin-left: 650px;
 }*/
-
-
-
-
-
-
