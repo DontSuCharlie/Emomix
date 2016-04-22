@@ -5,6 +5,7 @@ var typing = false;
 var timeout = undefined;
 var userCount = 0;
 var currentUser = '';
+var array = [];
 
 function timeoutFunction(){
   typing = false;
@@ -55,6 +56,8 @@ function setName() {
 
     				// addMessage("User " + $("#nameInput").val() + " entered room", "Me"); 
     		    currentUser = $("#nameInput").val();
+            //array.push(currentUser);
+            //console.log(array);
 		        $('#chatControls').show();
 		        $('#nameInput').hide();
 		        $('#nameSet').hide();
@@ -84,7 +87,15 @@ socket.on('nbUsers', function(msg) {
 });
 
 socket.on('userName', function(msg){
-    $("#userName").html(msg.un); 
+
+    // $("#userName").html(msg.un); 
+    console.log(array);
+    array.push(msg.un);
+    for(i = 0; i < array.length; i++){
+      console.log("i is: " + i);
+      $("#userName").append(array[i]+ "<br/>");
+    }
+    // $("#userName").append("<li>" + msg.un + "</li>");
 });
 
 

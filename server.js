@@ -127,6 +127,7 @@ io.sockets.on('connection', function (socket) {
 		{
 			socket.emit('nameStatus', 'error') // Send the error
 		}
+		reloadUsersName();
 	});	
 	socket.on('disconnect', function () { // Disconnection of the client
 		// sent by socket io automatically 
