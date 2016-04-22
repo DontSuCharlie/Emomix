@@ -8,6 +8,7 @@ html
         script(scr="server.js")
         script(src="script.js")
         script(src="jquery.modal.js")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple")
         link(rel="stylesheet", href="style.css")
         link(rel="stylesheet", href="jquery.modal.css")
 
@@ -19,8 +20,8 @@ html
                 var s = today.getSeconds();
                 m = checkTime(m);
                 s = checkTime(s);
-                document.getElementById('txt').innerHTML =
-                h + ":" + m + ":" + s;
+                //document.getElementById('txt').innerHTML =
+                //h + ":" + m + ":" + s;
                 var t = setTimeout(startTime, 500);
             }
             function checkTime(i) {
@@ -47,7 +48,6 @@ html
                 p.userNamePara Enter a username:
                 input(type='text')#nameInput
                 button.myButton#nameSet Set Name
-            #txt
             div#chatEntries.chat
                 div#chatEntriesright
             div#chatControls
