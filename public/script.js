@@ -31,6 +31,10 @@ function addMessage(msg, name) {
     } else {
       $("#chatEntries").append('<div class="messageSelf"><p>' + name + ' : ' + msg + '</p></div> <div class="clear"></div>');
     }
+    console.log("SCROLL");
+    $('#chatEntries').animate({
+        scrollTop: $("#chatEntries").offset().bottom
+    }, 2000);
 }
 
 function sendMessage() {
@@ -45,7 +49,6 @@ function sendMessage() {
 function setName() {
     if ($("#nameInput").val() != "")
     {
-      console.log("NAME ONCE SET");
     	$.modal.close();
     	socket.emit('setName', $("#nameInput").val());
       socket.on('nameStatus', function(data){
@@ -142,10 +145,10 @@ function notifyMe(user,message) {
 // init
 
 $(function() {
-    $('html, body').css({
-      'overflow': 'hidden',
-      'height': '100%'
-    });
+    // $('html, body').css({
+    //   'overflow': 'hidden',
+    //   'height': '100%'
+    // });
     $("#chatControls").hide();
     $("#messageInput").keypress(function(e) {
 		// alert("typing");

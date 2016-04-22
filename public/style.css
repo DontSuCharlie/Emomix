@@ -78,11 +78,11 @@ body {
 
 }
 
-.container {
-    width: 750px;
+/*.container {
+    
     height: auto;
     margin-left: 250px;
-}
+}*/
 
 .myButton:hover {
     background-color:#5cbf2a;
@@ -233,21 +233,23 @@ body {
 }
 
 #right {
-  width: 100px;
+  width: 15%;
   float: right;
   height: 100%;
   /*background-color: #fff;*/
-  margin-top: 80px;
-  margin-right: 300px;
+  margin-top: 5.5%;
+  margin-right: 10%;
 }
 
 #messageInput {
-	width: 750px;
+    position: absolute;
+	width: 71.5%;
 	height: 22px;
     border: none;
-    margin: auto;
+    margin-top: 32.5%;
+    margin-left: 1%;
     border-bottom: 2px solid blue;
-    border-radius:2px;
+    border-radius: 2px;
 }
 
 #submit {
@@ -263,17 +265,17 @@ body {
 }
 
 #chatEntries {
-    /*position:relative;*/
-    width: 730px;
-    margin: 15px auto;
-    min-height: 450px;
-    max-height: 450px;
-    /*height: 70%;*/
+    position:absolute;
+    width: 70%;
+    margin: 1%;
+    /*min-height: 450px;
+    max-height: 450px;*/
+    height: 50%;
     overflow-y:scroll;
     padding: 10px;
     border: 1px solid rgba(0,0,0,0.1);
     border-radius:2px;
-    background: white;
+    /*background: white;*/
     -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -299,7 +301,6 @@ body {
   background-color: #00b0ff;
 }
 
-
 #createRoom {
     width: 100px;
     height: 30px;
@@ -313,9 +314,3 @@ body {
     position: relative;
     margin-left: 650px;
 }*/
-
-
-
-
-
-
