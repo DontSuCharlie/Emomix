@@ -68,13 +68,13 @@ module.exports = {
 	testVar: testVar,
 	signup: signup,
 	signin: signin,
-	createChatRoom: createChatRoom,
-	addUsersToChatRoom: addUsersToChatRoom,
-	enterChatRoom: enterChatRoom,
+	createChatroom: createChatroom,
+	addUsersToChatroom: addUsersToChatroom,
+	enterChatroom: enterChatroom,
 	/*
-	removeChatRoom: removeChatRoom,
-	searchUsers: searchUsers,
-	sendMessage: sendMessage*/
+	removeChatroom: removeChatroom,
+	searchUsers: searchUsers,*/
+	sendMessage: sendMessage
 };
 
 var Firebase = require("firebase");
@@ -208,9 +208,9 @@ function signin(username, password)
 		sender date
 	}
 */
-function createChatRoom(username, name_of_room)
+function createChatroom(username, name_of_room)
 {
-	createChatRoomCallback(firebase_ref.push({
+	createChatroomCallback(firebase_ref.push({
 		Meta:{
 			name: name_of_room,
 			emotion: "Neutral",
@@ -227,7 +227,7 @@ function createChatRoom(username, name_of_room)
 	}), username, name_of_room);
 }
 
-function createChatRoomCallback(new_ref, username, name_of_room)
+function createChatroomCallback(new_ref, username, name_of_room)
 {
 	//get user's room field and add to it
 	var room_ID = new_ref["path"];
@@ -246,7 +246,7 @@ function createChatRoomCallback(new_ref, username, name_of_room)
 	b) Should result in an immediate change for the other users too
 */
 
-function addUsersToChatRoom(users, room)
+function addUsersToChatroom(users, room)
 {
 	var room_ID = room.room_ID;
 	var name_of_room = room.name_of_room;
@@ -266,7 +266,7 @@ function addUsersToChatRoom(users, room)
 	c) Search for the ID of the new room
 	d) Load the new room's info + all messages
 */
-function enterChatRoom(room)
+function enterChatroom(room)
 {
 	var room_ID = room.room_ID;
 	//remove previous callback
@@ -292,4 +292,46 @@ function displayChat(name, text, emotion)
 	console.log("Name = " + name);
 	console.log("Text = " + text);
 	console.log("Emotion = " + emotion);
+}
+
+/*
+6. Exit room (as in leave the group chat)
+	a) If last person, delete the room
+	b) Go to the person's room[] and pop() the room ID
+
+*/
+function removeChatroom(room)
+{
+
+}
+
+/*
+7. Search users
+	a) Returns the list of users
+*/
+function searchUsers()
+{
+	
+}
+
+/*
+8. Send message (to current room)
+	a) pushes to current room
+*/
+function sendMessage(user, message, room)
+{
+	roomlist_ref = new Firebase("https://emomix.firebaseio.com/roomlist/" + room.room_ID);
+	roomlist_ref.child("Meta").child("count").once("value", function(snapshot)
+	{
+		var count = snapshot.val();
+		count++;
+		roomlist_ref.child("Meta").child("count").set(count);
+		roomlist_ref.child("Messages").push({
+					name: user,
+					message: message,
+					emotion: "Happy",
+					date: new Date().getTime()
+				}
+		);
+	});
 }
