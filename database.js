@@ -70,8 +70,8 @@ module.exports = {
 	signin: signin,
 	createChatRoom: createChatRoom,
 	addUsersToChatRoom: addUsersToChatRoom,
-	/*
 	enterChatRoom: enterChatRoom,
+	/*
 	removeChatRoom: removeChatRoom,
 	searchUsers: searchUsers,
 	sendMessage: sendMessage*/
@@ -266,12 +266,13 @@ function addUsersToChatRoom(users, room)
 	c) Search for the ID of the new room
 	d) Load the new room's info + all messages
 */
-function enterChatRoom(name_of_room)
+function enterChatRoom(room)
 {
+	var room_ID = room.room_ID;
 	//remove previous callback
-	firebase_ref.off("child_added", onCallback);
+	firebase_ref.off();
 	//update pointer to the room
-	firebase_ref = new Firebase(firebase_url + "/" + name_of_room);
+	firebase_ref = new Firebase(firebase_url + "/" + room_ID + "/Messages");
 	//reattach callback
 	firebase_ref.on("child_added", onCallback);
 }
@@ -279,9 +280,11 @@ function enterChatRoom(name_of_room)
 
 function onCallback(snapshot)
 {
-	var name = snapshot.name;
-	var text = snapshot.text;
-	var emotion = snapshot.emotion;
+	var msg = snapshot.val();
+	var name = msg.name;
+	var text = msg.message;
+	var emotion = msg.emotion;
+	console.log("name = " + name + "\t\ntext = " + text + "\t\nemotion = " + emotion);
 }
 
 function displayChat(name, text, emotion)

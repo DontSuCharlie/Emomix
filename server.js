@@ -41,11 +41,11 @@ db.signup("Jun Ming", "noilikepie");
 //signin = checks if username and password match. if so, returns an array of rooms the user is in
 //arguments are (username, password)
 db.signin("Charlie", "ilikepie");
-
 //createChatRoom = adds a new room to the roomList. Also adds the ID of the room to the user's roomlist
 //arguments are (username, name_of_room)
 //db.createChatRoom("Charlie", "CS252");
-var addTheseUsers = ["Tarang", "Jun Ming"];
+var addTheseUsers = ["Tarang", "Jun Ming", "Charlie"];
+db.enterChatRoom({room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
 db.addUsersToChatRoom(addTheseUsers, {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
 
 //db.test();//test function
