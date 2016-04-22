@@ -77,19 +77,31 @@ module.exports = {
 
 var Firebase = require("firebase");
 //Pointer to Firebase (needs to update if we move to a different object)
-var firebase_url = "https://emomix.firebaseIO.com/emomix";
+var firebase_url = "https://emomix.firebaseIO.com";
 var username = "none";
 var firebase_ref = new Firebase(firebase_url);
 var myRooms;
 
 function test()
 {
-	console.log("database module is connected!");
-	firebase_ref.push({name: "Charlie", password: null});
+
+	//var test1 = "Charlie";
+	//var test2 = "password";
+	//var test3 = [];
+	//console.log("database module is connected!");
+	//var newUser = new Object;
+	//newUser[test1] = {password: test2, rooms: test3};
+	//var id = firebase_ref.child("userlist").set(newUser);
+	var searchName = new Firebase("https://emomix.firebaseio.com/userlist/Charlie").once('value', queryForUser);
+	if(searchName == null)
+		console.log("2: user not found");
+	else
+		console.log("2: user found");
 }
 
 function queryForUser(snapshot)
 {
+	console.log("1: snapshot.val = " + snapshot.val());
 	return snapshot.val();
 }
 
@@ -97,20 +109,31 @@ function queryForUser(snapshot)
 1. Create account
 	a) Check if username is already taken, if so, return error
 	b) If username is not taken, .push() the new user into list
+Pet Peeve #1 with Javascript: The only way to prevent asynchrony is with callbacks. Let's say I have a function that does two actions where the second
+action is dependent on the first. The only way to guarantee it is to turn both actions into functions and then chain them together. Talk about unnecessary overuse of the stack!
 */
 function signup(username, password)
 {
-	//first check if the username exists
-	var searchName = new Firebase(firebase_url + "/emomix/" + username).once('value', queryForUser);
-	//if it doesn't, add the new user!
-	if(username == null)
+	var userlist_ref = new Firebase("https://emomix.firebaseio.com/userlist");
+	return userlist_ref.once('value', function(snapshot)
 	{
-		firebase_ref.push({name: username, password: null, rooms: []});
-	}
-	else//return error
-	{
-		console.log("Username already exists");
-	}
+		//first check if the username exists
+		if(!snapshot.child(username).exists())
+		{
+			console.log("Creating new user " + username);
+			//create new object
+			var newUser = new Object();
+			newUser[username] = {password: password, rooms: []};
+			userlist_ref.set(newUser);
+			return true;
+		}
+		//if it doesn't, add the new user!
+		else//return error
+		{
+			console.log("Username already exists");
+			return false;
+		}
+	});
 }
 
 /*

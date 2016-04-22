@@ -26,7 +26,8 @@ server.listen(serverPort, host, function() {
   console.log("server starting on " + host + ":" + serverPort);
 });
 
-db.test();
+console.log(db.signup("Charlie", "ilikepie"));
+//db.test();
 
 app.set('views', __dirname + '/public');
 app.set('view engine', 'jade');
