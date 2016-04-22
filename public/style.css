@@ -233,10 +233,12 @@ body {
 }
 
 #right {
-  position: relative;
-  float: left;
-  width: 65%;
+  width: 100px;
+  float: right;
   height: 100%;
+  /*background-color: #fff;*/
+  margin-top: 80px;
+  margin-right: 300px;
 }
 
 #messageInput {
