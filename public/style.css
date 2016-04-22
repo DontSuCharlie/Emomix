@@ -224,11 +224,12 @@ body {
 }
 
 #left {
+  width: 100px;
   float: left;
-  width: 35%;
   height: 100%;
-  /*border: 1px solid #e6e6e6;;*/
-  background-color: #fff;
+  /*background-color: #fff;*/
+  margin-top: 80px;
+  margin-left: 150px;
 }
 
 #right {
@@ -297,7 +298,15 @@ body {
 }
 
 
+#createRoom {
+    width: 100px;
+    height: 30px;
+}
 
+#enterRoom {
+    width: 100px;
+    height: 30px;
+}
 /*.messageSelf {
     position: relative;
     margin-left: 650px;

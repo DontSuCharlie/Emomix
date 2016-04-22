@@ -29,14 +29,18 @@ html
             }
 
     body(onload="startTime();")
+        div#left
+            button.createRoom#createRoom Create Room
+            button.enterRoom#enterRoom Enter Room
         div.container
             div#welcomeParagraph
-            div#left
-                //div#top
+            //div#left
+                div#top
                     input(type='text')#nameSearch
                     button#search Search
                     p User in the room
                     div#userName
+                button.createRoom#createRoom Create Room
             div#updates
             div.modal#nameForm
                 p.userNamePara Enter a username:
