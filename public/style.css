@@ -9,11 +9,182 @@ html, input {
     sans-serif;
 }
 
+@import "compass/css3";
+
+body {
+    font-family: "Helvetica Neue";
+    font-size: 18px;
+    font-weight: normal;
+}
+
+section {
+    max-width: 450px;
+    margin: 50px auto;
+
+    div {
+        max-width: 255px;
+        word-wrap: break-word;
+        margin-bottom: 40px;
+        line-height: 14px;
+    }
+}
+
+header {
+  font-family: 'Quicksand';
+  padding: 30px 10px;
+  color: #fff;
+  font-size: 15px;
+  text-align: center;
+  /*
+   * Note the use of the `main-color`
+   * variable and the `darken` function
+   */
+  background-color: #000000;
+  border-bottom: 1px solid #df1806;
+  text-shadow: 0px -1px 0px #df1806;
+}
+
+footer {
+  width: 500px;
+  margin: 50px auto;
+  border-top: 1px dotted #ccc;
+  padding-top: 2px;
+  font-size: 13px;
+}
+
+h1 {
+    font-family: 'Quicksand';
+    margin: 13px 10px 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #ddd;
+    -webkit-border-radius: 2px 2px 0px 0px;
+    border-radius: 2px 2px 0px 0px;
+    margin-bottom: 10px;
+    color: #00b0ff;
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background: url(http://www.mrwallpaper.com/wallpapers/gradient-background.jpg);*/
+    /*background: url(http://s17.postimg.org/fr01hfe33/image.jpg);*/
+    background-size: cover;
+    background-repeat: none;
+
+}
+
 .container {
     width: 750px;
     height: auto;
     margin-left: 250px;
 }
+
+.myButton:hover {
+    background-color:#5cbf2a;
+}
+
+.myButton:active {
+    position:relative;
+    top:1px;
+}
+
+.userNamePara {
+    font-size:20px;
+}
+
+.clear {clear: both}
+.messageSelf  {
+    position:relative;
+    padding:3px 6px;
+    color:white; 
+    font-size: 16px;
+    background:#0B93F6;
+    border-radius:25px;
+    float: right;
+    margin: 5px;
+    &:before {
+        content:"";
+        position:absolute;
+        z-index:-1;
+        bottom:-2px;
+        right:-7px;
+        height:10px;
+        border-right:20px solid #0B93F6;
+        border-bottom-left-radius: 16px 14px;
+        -webkit-transform:translate(0, -2px);
+    }
+
+    &:after {
+        content:"";
+        position:absolute;
+        z-index:1;
+        bottom:-2px;
+        right:-56px;
+        width:26px;
+        height:10px;
+        background:white;
+        border-bottom-left-radius: 10px;
+        -webkit-transform:translate(-30px, -2px);
+    }
+}
+
+.message {
+    position:relative;
+    padding:8px 6px;
+    background:#E5E5EA;
+    font-size: 16px;
+    border-radius:25px;
+    color: black;
+    float: left;
+    margin: 5px;   
+    &:before {
+        content:"";
+        position:absolute;
+        z-index:2;
+        bottom:-2px;
+        left:-7px;
+        height:20px;
+        border-left:20px solid #E5E5EA;
+        border-bottom-right-radius: 16px 14px;
+        -webkit-transform:translate(0, -2px);
+    }
+
+    &:after {
+        content:"";
+        position:absolute;
+        z-index:3;
+        bottom:-2px;
+        left:4px;
+        width:26px;
+        height:10px;
+        background:white;
+        border-bottom-right-radius: 10px;
+        -webkit-transform:translate(-30px, -2px);
+    }
+} 
+
+.myButton {
+    margin-left: 28px;
+    background-color:#44c767;
+    -moz-border-radius:28px;
+    -webkit-border-radius:28px;
+    border-radius:28px;
+    border:1px solid #18ab29;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:14px;
+    padding:6px 10px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+}
+
 
 #welcomeParagraph {
     /*color:#00b0ff;*/
@@ -125,85 +296,7 @@ html, input {
   background-color: #00b0ff;
 }
 
-header {
-  font-family: 'Quicksand';
-  padding: 30px 10px;
-  color: #fff;
-  font-size: 15px;
-  text-align: center;
-  /*
-   * Note the use of the `main-color`
-   * variable and the `darken` function
-   */
-  background-color: #000000;
-  border-bottom: 1px solid #df1806;
-  text-shadow: 0px -1px 0px #df1806;
-}
 
-footer {
-  width: 500px;
-  margin: 50px auto;
-  border-top: 1px dotted #ccc;
-  padding-top: 2px;
-  font-size: 13px;
-}
-
-h1 {
-    font-family: 'Quicksand';
-    margin: 13px 10px 4px;
-    padding-bottom: 10px;
-    border-bottom: 1px dotted #ddd;
-    -webkit-border-radius: 2px 2px 0px 0px;
-    border-radius: 2px 2px 0px 0px;
-    margin-bottom: 10px;
-    color: #00b0ff;
-}
-
-.myButton {
-    margin-left: 28px;
-    background-color:#44c767;
-    -moz-border-radius:28px;
-    -webkit-border-radius:28px;
-    border-radius:28px;
-    border:1px solid #18ab29;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:Arial;
-    font-size:14px;
-    padding:6px 10px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #2f6627;
-}
-
-.myButton:hover {
-    background-color:#5cbf2a;
-}
-
-.myButton:active {
-    position:relative;
-    top:1px;
-}
-
-.userNamePara {
-    font-size:20px;
-}
-
-
-*:focus {
-    outline: none;
-}
-
-body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    background: url(http://www.mrwallpaper.com/wallpapers/gradient-background.jpg);*/
-    /*background: url(http://s17.postimg.org/fr01hfe33/image.jpg);*/
-    background-size: cover;
-    background-repeat: none;
-
-}
 
 /*.messageSelf {
     position: relative;
@@ -211,94 +304,7 @@ body {
 }*/
 
 
-@import "compass/css3";
 
-body {
-    font-family: "Helvetica Neue";
-    font-size: 18px;
-    font-weight: normal;
-}
 
-section {
-    max-width: 450px;
-    margin: 50px auto;
 
-    div {
-        max-width: 255px;
-        word-wrap: break-word;
-        margin-bottom: 40px;
-        line-height: 14px;
-    }
-}
-
-.clear {clear: both}
-.messageSelf  {
-    position:relative;
-    padding:3px 6px;
-    color:white; 
-    font-size: 16px;
-    background:#0B93F6;
-    border-radius:25px;
-    float: right;
-    margin: 5px;
-    &:before {
-        content:"";
-        position:absolute;
-        z-index:-1;
-        bottom:-2px;
-        right:-7px;
-        height:10px;
-        border-right:20px solid #0B93F6;
-        border-bottom-left-radius: 16px 14px;
-        -webkit-transform:translate(0, -2px);
-    }
-
-    &:after {
-        content:"";
-        position:absolute;
-        z-index:1;
-        bottom:-2px;
-        right:-56px;
-        width:26px;
-        height:10px;
-        background:white;
-        border-bottom-left-radius: 10px;
-        -webkit-transform:translate(-30px, -2px);
-    }
-}
-
-.message {
-    position:relative;
-    padding:8px 6px;
-    background:#E5E5EA;
-    font-size: 16px;
-    border-radius:25px;
-    color: black;
-    float: left;
-    margin: 5px;   
-    &:before {
-        content:"";
-        position:absolute;
-        z-index:2;
-        bottom:-2px;
-        left:-7px;
-        height:20px;
-        border-left:20px solid #E5E5EA;
-        border-bottom-right-radius: 16px 14px;
-        -webkit-transform:translate(0, -2px);
-    }
-
-    &:after {
-        content:"";
-        position:absolute;
-        z-index:3;
-        bottom:-2px;
-        left:4px;
-        width:26px;
-        height:10px;
-        background:white;
-        border-bottom-right-radius: 10px;
-        -webkit-transform:translate(-30px, -2px);
-    }
-} 
 
