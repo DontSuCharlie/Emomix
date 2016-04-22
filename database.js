@@ -61,6 +61,7 @@ The chat rooms will also hold the chat messages
 
 
 */
+var testVar = 1;
 
 module.exports = {
 	test: test,
@@ -76,7 +77,6 @@ module.exports = {
 	sendMessage: sendMessage*/
 };
 
-var testVar = 1;
 var Firebase = require("firebase");
 //Pointer to Firebase (needs to update if we move to a different object)
 var firebase_url = "https://emomix.firebaseIO.com/roomlist";
@@ -250,12 +250,12 @@ function addUsersToChatRoom(users, room)
 {
 	var room_ID = room.room_ID;
 	var name_of_room = room.name_of_room;
-	var numUsers = users.length();
+	var numUsers = users.length;
 	for(var i = 0; i < numUsers; i++)
 	{
 		//get user's room field and add to it
 		//console.log(firebase_url + "/userlist/" + username + "/rooms/" + room_ID);
-		new Firebase(userlist_ref + "/" + username + "/rooms/" + room_ID).set(name_of_room);
+		new Firebase(userlist_ref + "/" + users[i] + "/rooms/" + room_ID).set(name_of_room);
 	}
 }
 

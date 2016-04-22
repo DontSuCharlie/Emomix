@@ -45,7 +45,8 @@ db.signin("Charlie", "ilikepie");
 //createChatRoom = adds a new room to the roomList. Also adds the ID of the room to the user's roomlist
 //arguments are (username, name_of_room)
 //db.createChatRoom("Charlie", "CS252");
-//db.addUsersToChatRoom(["Tarang", "Jun Ming"], )
+var addTheseUsers = ["Tarang", "Jun Ming"];
+db.addUsersToChatRoom(addTheseUsers, {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
 
 //db.test();//test function
 //////////////////////////////////////////////////////////////////////////////////
