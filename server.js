@@ -12,7 +12,6 @@ var http = require('http')
   , io = require('socket.io').listen(server)
   , watson = require('watson-developer-cloud');
 var jade = require('jade');
-var db = require('./database.js');
 var nameArray = [];	// contain all name of user in the room
 var users = 0; //number of connected users
 
@@ -26,11 +25,28 @@ server.listen(serverPort, host, function() {
   console.log("server starting on " + host + ":" + serverPort);
 });
 
-db.signup("Charlie", "ilikepie");
-db.signin("Charlie", "ilikepie");
-db.createChatRoom("Charlie", "CS Majors Only");
-db.test();
+/*Database shit is here. Please read comments fully
+Uncomment to play around with*/
+///////////////////////////////////////////////////////////////////////////////
+/*
+//to include the database.js code into server.js
+//every function/variable from database.js will be accessed as db.func() or db.var
+var db = require('./database.js');
 
+//sign up = adds user to userbase if user already not in database
+//arguments are (username, password)
+db.signup("Charlie", "ilikepie");
+
+//signin = checks if username and password match. if so, returns an array of rooms the user is in
+//arguments are (username, password)
+db.signin("Charlie", "ilikepie");
+
+//createChatRoom = adds a new room to the roomList. Also adds the ID of the room to the user's roomlist
+//arguments are (username, name_of_room)
+db.createChatRoom("Charlie", "CS Majors Only");
+*/
+//db.test();//test function
+//////////////////////////////////////////////////////////////////////////////////
 app.set('views', __dirname + '/public');
 app.set('view engine', 'jade');
 app.set("view options", { layout: false });
