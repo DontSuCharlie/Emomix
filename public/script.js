@@ -35,6 +35,20 @@ function addMessage(msg, name) {
     $('#chatEntries').animate({
         scrollTop: $("#chatEntries").offset().bottom
     }, 2000);
+
+    // add here
+    var $cont = $('#chatEntries');
+    $cont[0].scrollTop = $cont[0].scrollHeight;
+
+    $('#messageInput').keyup(function(e) {
+        if (e.keyCode == 13) {
+            // $cont.append('<p>' + $(this).val() + '</p>');
+            $cont[0].scrollTop = $cont[0].scrollHeight;
+            $(this).val('');
+        }
+    })
+
+
 }
 
 function sendMessage() {
