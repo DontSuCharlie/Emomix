@@ -64,17 +64,19 @@ The chat rooms will also hold the chat messages
 
 module.exports = {
 	test: test,
+	testVar: testVar,
 	signup: signup,
 	signin: signin,
 	createChatRoom: createChatRoom,
-	/*
 	addUsersToChatRoom: addUsersToChatRoom,
+	/*
 	enterChatRoom: enterChatRoom,
 	removeChatRoom: removeChatRoom,
 	searchUsers: searchUsers,
 	sendMessage: sendMessage*/
 };
 
+var testVar = 1;
 var Firebase = require("firebase");
 //Pointer to Firebase (needs to update if we move to a different object)
 var firebase_url = "https://emomix.firebaseIO.com/roomlist";
@@ -127,8 +129,9 @@ function signup(username, password)
 			console.log("Creating new user " + username);
 			//create new object
 			var newUser = new Object();
-			newUser[username] = {password: password, rooms: []};
-			userlist_ref.set(newUser);
+			newUser = {password: password, rooms: []};
+			//newUser[username] = {password: password, rooms: []};
+			userlist_ref.child(username).set(newUser);
 			return true;
 		}
 		//if it doesn't, add the new user!
@@ -232,7 +235,9 @@ function createChatRoomCallback(new_ref, username, name_of_room)
 	console.log(room_ID[1]);
 	room_ID = room_ID[1];
 	//console.log(firebase_url + "/userlist/" + username + "/rooms/" + room_ID);
-	new Firebase(userlist_ref + "/" + username + "/rooms/" + room_ID).set(name_of_room);		
+	new Firebase(userlist_ref + "/" + username + "/rooms/" + room_ID).set(name_of_room);
+	//update array with the room
+	myrooms.push({room_ID: room_ID, name_of_room: name_of_room});
 }
 
 /*
@@ -241,13 +246,16 @@ function createChatRoomCallback(new_ref, username, name_of_room)
 	b) Should result in an immediate change for the other users too
 */
 
-function addUsersToChatRoom(users)
+function addUsersToChatRoom(users, room)
 {
+	var room_ID = room.room_ID;
+	var name_of_room = room.name_of_room;
 	var numUsers = users.length();
-
 	for(var i = 0; i < numUsers; i++)
 	{
-
+		//get user's room field and add to it
+		//console.log(firebase_url + "/userlist/" + username + "/rooms/" + room_ID);
+		new Firebase(userlist_ref + "/" + username + "/rooms/" + room_ID).set(name_of_room);
 	}
 }
 

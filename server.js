@@ -28,7 +28,7 @@ server.listen(serverPort, host, function() {
 /*Database shit is here. Please read comments fully
 Uncomment to play around with*/
 ///////////////////////////////////////////////////////////////////////////////
-/*
+
 //to include the database.js code into server.js
 //every function/variable from database.js will be accessed as db.func() or db.var
 var db = require('./database.js');
@@ -36,15 +36,17 @@ var db = require('./database.js');
 //sign up = adds user to userbase if user already not in database
 //arguments are (username, password)
 db.signup("Charlie", "ilikepie");
-
+db.signup("Tarang", "ilikepie2");
+db.signup("Jun Ming", "noilikepie");
 //signin = checks if username and password match. if so, returns an array of rooms the user is in
 //arguments are (username, password)
 db.signin("Charlie", "ilikepie");
 
 //createChatRoom = adds a new room to the roomList. Also adds the ID of the room to the user's roomlist
 //arguments are (username, name_of_room)
-db.createChatRoom("Charlie", "CS Majors Only");
-*/
+//db.createChatRoom("Charlie", "CS252");
+//db.addUsersToChatRoom(["Tarang", "Jun Ming"], )
+
 //db.test();//test function
 //////////////////////////////////////////////////////////////////////////////////
 app.set('views', __dirname + '/public');
