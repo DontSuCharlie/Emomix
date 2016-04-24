@@ -333,7 +333,7 @@ body {
 #messageInput  {
     position: absolute;
     height: 12%;
-    width: 71.5%;
+    width: 71%;
     margin-top: 32.5%;
     margin-left: 1%;
     font-size:18px;
@@ -370,7 +370,7 @@ label                {
     width:300px; 
     position: absolute;
     height: 5%;
-    width: 71.5%;
+    width: 71%;
     margin-top: 32.5%;
     margin-left: 1%;
  }
@@ -402,7 +402,7 @@ label                {
 .highlight {
     position: absolute;
     height: 5%;
-    width: 71.5%;
+    width: 71%;
     margin-top: 32.5%;
     margin-left: 1%;
     height:60%; 
