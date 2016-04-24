@@ -36,7 +36,7 @@ function addMessage(msg, name) {
         scrollTop: $("#chatEntries").offset().bottom
     }, 2000);
 
-    // add here
+    // scroll automatically when new message arrives
     var $cont = $('#chatEntries');
     $cont[0].scrollTop = $cont[0].scrollHeight;
 

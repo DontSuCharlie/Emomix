@@ -132,6 +132,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('setName', function (data) { // Assign a name to the user
+		console.log("SETTTT");
 		if (nameArray.indexOf(data) == -1) // Test if the name is already taken
 		{
 			name = data;
@@ -150,14 +151,17 @@ io.sockets.on('connection', function (socket) {
 	});	
 	socket.on('disconnect', function () { // Disconnection of the client
 		// sent by socket io automatically 
+		console.log("Disconnection");
 		name = socket.nickname;
 		var index = nameArray.indexOf(name);
+
 		if(index != -1) { // make sure the name exists
-			name.slice(index - 1, 1);
+			nameArray.splice(index, 1);
 			users -= 1;
 			reloadUsers();
 			reloadUsersName();
 		}
+
 	});
 });
 

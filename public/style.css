@@ -256,7 +256,7 @@ body {
     border-radius:40px;
 }
 
-#messageInput {
+/*#messageInput {
     position: absolute;
     width: 71.5%;
     height: 3%;
@@ -266,7 +266,7 @@ body {
     margin-left: 1%;
     border-bottom: 2px solid blue;
     border-radius: 2px;
-}
+}*/
 
 #chatEntries {
     position:absolute;
@@ -319,3 +319,117 @@ body {
     position: relative;
     margin-left: 650px;
 }*/
+
+* { box-sizing:border-box; }
+
+
+/* MessageBox */
+/* form starting stylings ------------------------------- */
+.group            { 
+  position:relative; 
+  margin-bottom:45px; 
+}
+
+#messageInput  {
+    position: absolute;
+    height: 12%;
+    width: 71.5%;
+    margin-top: 32.5%;
+    margin-left: 1%;
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    border:none;
+    border-bottom:1px solid #757575;
+}
+/*input:focus         { outline:none; }*/
+
+/* LABEL ======================================= */
+label                {
+    color:#999; 
+    font-size:18px;
+    font-weight:normal;
+    pointer-events:none;
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+    position: absolute;
+    margin-top: 32.5%;
+    margin-left: 1%;
+}
+
+/* active state */
+#messageInput:focus ~ label, #messageInput:valid ~ label        {
+  top:-20px;
+  font-size:14px;
+  color:#5264AE;
+}
+
+/* BOTTOM BARS ================================= */
+.bar    { display:block; 
+    width:300px; 
+    position: absolute;
+    height: 5%;
+    width: 71.5%;
+    margin-top: 32.5%;
+    margin-left: 1%;
+ }
+.bar:before, .bar:after     {
+    content:'';
+    height:2px; 
+    width:0;
+    bottom:1px; 
+    position:absolute;
+    background:#5264AE; 
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+    
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+
+/* active state */
+#messageInput:focus ~ .bar:before, #messageInput:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+    position: absolute;
+    height: 5%;
+    width: 71.5%;
+    margin-top: 32.5%;
+    margin-left: 1%;
+    height:60%; 
+    width:100px; 
+    top:25%; 
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
+}
+
+/* active state */
+#messageInput:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from { background:#5264AE; }
+  to    { width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+    from { background:#5264AE; }
+  to    { width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+    from { background:#5264AE; }
+  to    { width:0; background:transparent; }
+}
