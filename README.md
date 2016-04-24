@@ -20,6 +20,7 @@ Features:
 3. Emotion analysis
 4. Who is typing
 5. Users in room
+6. Emoticons
 
 ## The Team
 
