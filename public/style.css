@@ -366,7 +366,8 @@ label                {
 }
 
 /* BOTTOM BARS ================================= */
-.bar    { display:block; 
+.bar { 
+    display:block; 
     width:300px; 
     position: absolute;
     height: 5%;
