@@ -111,8 +111,8 @@ io.sockets.on('connection', function (socket) {
 				console.log(emotionTone[largest]["score"]);
 				console.log(emotionTone[largest]["tone_name"]);
 				// need better way to show emotion along with message--both same time
-				var transmit2 = {name : socket.nickname, message : "Emotion is " + emotionTone[largest]["tone_name"]};
-				io.sockets.emit('message', transmit2);
+				var transmitEmotion = {name: socket.nickname, message :"is feeling " + emotionTone[largest]["tone_name"]};
+				io.sockets.emit('emotion', transmitEmotion);
 		    }
 		});
 

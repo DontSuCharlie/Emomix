@@ -12,9 +12,7 @@ function timeoutFunction(){
   socket.emit("typing", {isTyping: false, person: currentUser});
 }
 
-socket.on("isTyping", function(data) {  
-  console.log("typing");
-  console.log(data);
+socket.on("isTyping", function(data) {
   if (data.isTyping) {
     if ($("#"+data.person+"").length === 0) {
       $("#updates").append("<li id='"+ data.person +"'><span class='text-muted'><small><i class='fa fa-keyboard-o'></i>" + data.person + " is typing...</small></li>");
@@ -25,11 +23,12 @@ socket.on("isTyping", function(data) {
   }
 });
 
+
 function addMessage(msg, name) {
     if(currentUser != name) {
-      $("#chatEntries").append('<div class="message"><p>' + name + ' : ' + msg + '</p></div> <div class="clear"></div>');
+      $("#chatEntries").append('<div class="message"><p>' + name + ': ' + msg + '</p></div> <div class="clear"></div>');
     } else {
-      $("#chatEntries").append('<div class="messageSelf"><p>' + name + ' : ' + msg + '</p></div> <div class="clear"></div>');
+      $("#chatEntries").append('<div class="messageSelf"><p>' + name + ': ' + msg + '</p></div> <div class="clear"></div>');
     }
     console.log("SCROLL");
     $('#chatEntries').animate({
@@ -47,8 +46,6 @@ function addMessage(msg, name) {
             $(this).val('');
         }
     })
-
-
 }
 
 function sendMessage() {
@@ -90,6 +87,54 @@ function setName() {
 		})  
 
   }
+}
+
+socket.on('emotion', function(data) {
+  addEmotion(data['message'], data['name']);
+
+});
+
+// added custom method to String
+String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
+
+function addEmotion(msg, name) {
+    if(currentUser != name) {
+      if(msg.contains("Joy")) { // happy 
+        $("#chatEntries").append('<div class="message"><p>' + name + ' ' + msg + '</p></div> <div class="clear"></div>' + '<div class="emotion"><a href="http://www.sherv.net/"><img alt="Bouncing" width=80 height=90 src="http://www.sherv.net/cm/emo/laughing/bouncing-smiley-emoticon.gif"></a></div>');
+      } else if(msg.contains("Sadness")) {
+        $("#chatEntries").append('<div class="message"><p>' + name + ' ' + msg + '</p></div> <div class="clear"></div>' + '<div class="emotion"><a href="http://www.sherv.net/"><img alt="Sad face" width=112 height=95 src="http://www.sherv.net/cm/emo/sad/sad-face.gif"></a></div>');
+      } else if(msg.contains("Anger")) {
+        $("#chatEntries").append('<div class="message"><p>' + name + ' ' + msg + '</p></div> <div class="clear"></div>' + '<div class="emotion"><a href="http://www.sherv.net/"><img alt="3D smiley full of anger" src="http://www.sherv.net/cm/emo/angry/3d-mad.gif"></a></div>');
+      } else if(msg.contains("Disgust")) {
+        $("#chatEntries").append('<div class="messageSelf"><p>' + name + ' ' + msg + '</p></div> <div class="clear"></div>' + '<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="3D smiley full of anger" src="http://www.sherv.net/cm/emo/angry/3d-mad.gif"></a></div>');
+      }
+    } else { // current user sent message
+      if(msg.contains("Joy")) { // happy 
+        $("#chatEntries").append('<div class="messageSelf"><p>' + name + ' ' + msg + '</p></div> <div class="clear"></div> ' + '<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="Bouncing" width=80 height=90 src="http://www.sherv.net/cm/emo/laughing/bouncing-smiley-emoticon.gif"></a></div><div class="clear"></div>');
+      } else if(msg.contains("Sadness")){
+        $("#chatEntries").append('<div class="messageSelf"><p>' + name + ' ' + msg + '</p></div> <div class="clear"></div> ' + '<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="Sad face" width=112 height=95 src="http://www.sherv.net/cm/emo/sad/sad-face.gif"></a></div><div class="clear"></div>');
+      } else if(msg.contains("Anger")) {
+        $("#chatEntries").append('<div class="messageSelf"><p>' + name + ' ' + msg + '</p></div> <div class="clear"></div>' + '<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="3D smiley full of anger" src="http://www.sherv.net/cm/emo/angry/3d-mad.gif"></a></div>');
+      } else if(msg.contains("Disgust")) {
+        $("#chatEntries").append('<div class="messageSelf"><p>' + name + ' ' + msg + '</p></div> <div class="clear"></div>' + '<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="3D smiley full of anger" src="http://www.sherv.net/cm/emo/angry/3d-mad.gif"></a></div>');
+      }
+    }
+
+    $('#chatEntries').animate({
+        scrollTop: $("#chatEntries").offset().bottom
+    }, 2000);
+
+    // scroll automatically when new message arrives
+    var $cont = $('#chatEntries');
+    $cont[0].scrollTop = $cont[0].scrollHeight;
+
+    $('#messageInput').keyup(function(e) {
+        if (e.keyCode == 13) {
+            // $cont.append('<p>' + $(this).val() + '</p>');
+            $cont[0].scrollTop = $cont[0].scrollHeight;
+            $(this).val('');
+        }
+    })
 }
 
 socket.on('message', function(data) {
@@ -170,6 +215,7 @@ $(function() {
 		    if (typing === false && $("#messageInput").is(":focus")) {
 		      typing = true;
 		      socket.emit("typing", {isTyping: true, person: currentUser});
+
 		    } else {
 		      clearTimeout(timeout);
 		      timeout = setTimeout(timeoutFunction, 5000);

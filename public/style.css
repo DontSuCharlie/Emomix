@@ -97,16 +97,27 @@ body {
     font-size:20px;
 }
 
+.emotion {
+
+}
+
+.emotionSelf {
+    position:relative;
+    padding:3px 6px;
+    float: right;
+    margin: 5px;
+}
+
 .clear {clear: both}
 .messageSelf  {
     position:relative;
     padding:3px 6px;
+    float: right;
+    margin: 5px;
     color:white; 
     font-size: 16px;
     background:#0B93F6;
     border-radius:25px;
-    float: right;
-    margin: 5px;
     &:before {
         content:"";
         position:absolute;
