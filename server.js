@@ -170,6 +170,6 @@ function reloadUsers() { // Send the count of the users to all
 }
 
 function reloadUsersName() {
-	io.sockets.emit('userName', {"un": name});
+	io.sockets.emit('usersInRoom', {"un": nameArray});
 }
 

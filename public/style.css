@@ -97,6 +97,15 @@ body {
     font-size:20px;
 }
 
+#usersInRoom {
+    width: 1%;
+    float: right;
+    height: 100%;
+    background-color: #fff;
+    margin-top: 3%;
+    margin-right: 1%;
+}
+
 .emotion {
 
 }

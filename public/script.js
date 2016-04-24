@@ -148,17 +148,13 @@ socket.on('nbUsers', function(msg) {
     $("#nbUsers").html(msg.nb);
 });
 
-socket.on('userName', function(msg){
-
-    // $("#userName").html(msg.un); 
-    // console.log(array);
-    // console.log("length is: " + array.length);
-    // // array.push(msg.un);
-    // for(i = 0; i < array.length-1; i++){
-    //   console.log("i is: " + i);
-    //   $("#userName").append(array[i]+ "<br/>");
-    // }
-    // $("#userName").append("<li>" + msg.un + "</li>");
+socket.on('usersInRoom', function(msg){
+    $("#updates").empty(); // clear, users might disconnect, and its appending
+    $("#updates").append("Users in room: <br/>")
+    for(i = 0; i < msg.un.length; i++){
+      $("#updates").append("- " + msg.un[i] + "<br/>");
+    }
+    $("#updates").append("------------");
 });
 
 
