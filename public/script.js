@@ -114,24 +114,28 @@ function addEmotion(msg, name) {
       if(msg.contains("Joy")) { // happy 
         $("#chatEntries").append('<div class="emotion"><a href="http://www.sherv.net/"><img alt="Bouncing" width=80 height=90 src="http://www.sherv.net/cm/emo/laughing/bouncing-smiley-emoticon.gif"></a></div><div class="clear"></div>');
       } else if(msg.contains("Sadness")) {
-        $("#chatEntries").append('<div class="emotion"><a href="http://www.sherv.net/"><img alt="Sad face" width=112 height=95 src="http://www.sherv.net/cm/emo/sad/sad-face.gif"></a></div><div class="clear"></div>');
+        $("#chatEntries").append('<div class="emotion"><a href="http://www.sherv.net/"><img alt="Sad face"width=80 height=90 src="http://www.sherv.net/cm/emo/sad/sad-face.gif"></a></div><div class="clear"></div>');
       } else if(msg.contains("Anger")) {
-        $("#chatEntries").append('<div class="emotion"><a href="http://www.sherv.net/"><img alt="3D smiley full of anger" src="http://www.sherv.net/cm/emo/angry/3d-mad.gif"></a></div><div class="clear"></div>');
+        $("#chatEntries").append('<div class="emotion"><a href="http://www.sherv.net/"><img alt="3D smiley full of anger" width=80 height=90 src="http://www.sherv.net/cm/emo/angry/3d-mad.gif"></a></div><div class="clear"></div>');
       } else if(msg.contains("Disgust")) {
         $("#chatEntries").append('<div class="emotion"><a href="http://www.freesmileys.org/smileys.php"><img width=80 height=90 src="http://www.freesmileys.org/smileys/smiley-sick006.gif"></a></div><div class="clear"></div>');
-
         // $("#chatEntries").append('<div class="messageSelf"><p>' + name + ' ' + msg + '</p></div> <div class="clear"></div>' + '<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="3D smiley full of anger" src="http://www.sherv.net/cm/emo/angry/3d-mad.gif"></a></div>');
+      } else if(msg.contains("Fear")) {
+        $("#chatEntries").append('<div class="emotion"><a href="http://www.sherv.net/"><img alt="Scary Smiley Screaming" width=80 height=90 src="http://www.sherv.net/cm/emoticons/shocked/scary-smiley-screaming-emoticon.gif"></a></div><div class="clear"></div>');
       }
+
     } else { // current user sent message
       if(msg.contains("Joy")) { // happy 
         $("#chatEntries").append('<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="Bouncing" width=80 height=90 src="http://www.sherv.net/cm/emo/laughing/bouncing-smiley-emoticon.gif"></a></div><div class="clear"></div>');
       } else if(msg.contains("Sadness")){
-        $("#chatEntries").append('<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="Sad face" width=112 height=95 src="http://www.sherv.net/cm/emo/sad/sad-face.gif"></a></div><div class="clear"></div>');
+        $("#chatEntries").append('<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="Sad face" width=80 height=90 src="http://www.sherv.net/cm/emo/sad/sad-face.gif"></a></div><div class="clear"></div>');
       } else if(msg.contains("Anger")) {
-        $("#chatEntries").append('<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="3D smiley full of anger" src="http://www.sherv.net/cm/emo/angry/3d-mad.gif"></a></div><div class="clear"></div>');
+        $("#chatEntries").append('<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="3D smiley full of anger" width=80 height=90 src="http://www.sherv.net/cm/emo/angry/3d-mad.gif"></a></div><div class="clear"></div>');
       } else if(msg.contains("Disgust")) {
         $("#chatEntries").append('<div class="emotionSelf"><a href="http://www.freesmileys.org/smileys.php"><img width=80 height=90 src="http://www.freesmileys.org/smileys/smiley-sick006.gif"></a></div><div class="clear"></div>');
         // $("#chatEntries").append('<div class="messageSelf"><p>' + name + ' ' + msg + '</p></div> <div class="clear"></div>' + '<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="3D smiley full of anger" src="http://www.sherv.net/cm/emo/angry/3d-mad.gif"></a></div>');
+      } else if(msg.contains("Fear")) {
+        $("#chatEntries").append('<div class="emotionSelf"><a href="http://www.sherv.net/"><img alt="Scary Smiley Screaming" width=80 height=90 src="http://www.sherv.net/cm/emoticons/shocked/scary-smiley-screaming-emoticon.gif"></a></div><div class="clear"></div>');
       }
     }
 
