@@ -74,7 +74,7 @@ function getRooms(str, rooms)
 
 //db.enterChatroom({room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"}, getMsg);
 //db.addUsersToChatroom(addTheseUsers, {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
-//db.sendMessage("Jun Ming", "sending message!", {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
+//db.sendMessage("Jun Ming", "no", {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
 //db.test();//test function
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -107,7 +107,7 @@ io.sockets.on('connection', function (socket) {
     // new connection
 	socket.on('message', function (data) { // Broadcast the message
 		var transmit = {name : socket.nickname, message : data};
-		//db.enterChatroom({room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
+		db.sendMessage(socket.nickname, data);
 		io.sockets.emit('message', transmit);
 		tone_analyzer.tone({ text: data },
 		  function(err, tone) {

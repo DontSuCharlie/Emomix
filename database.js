@@ -70,6 +70,7 @@ module.exports = {
 	addUsersToChatroom: addUsersToChatroom,
 	enterChatroom: enterChatroom,
 	myRooms: myRooms,
+	currentRoom: currentRoom,
 	/*
 	removeChatroom: removeChatroom,
 	searchUsers: searchUsers,*/
@@ -83,6 +84,7 @@ var username = "none";
 var firebase_ref = new Firebase(firebase_url);
 var userlist_ref = new Firebase("https://emomix.firebaseio.com/userlist");
 var roomlist_ref = new Firebase("https://emomix.firebaseio.com/roomlist");
+var currentRoom;
 var myRooms = [];
 
 function test()
@@ -278,6 +280,8 @@ function addUsersToChatroom(users, room)
 function enterChatroom(room, func)
 {
 	var room_ID = room;
+	currentRoom = room_ID;
+	console.log("current room better be fucking defined here = " + currentRoom);
 	//remove previous callback
 	firebase_ref.off();
 	//update pointer to the room
@@ -334,9 +338,10 @@ function searchUsers()
 8. Send message (to current room)
 	a) pushes to current room
 */
-function sendMessage(user, message, room)
+function sendMessage(user, message)
 {
-	roomlist_ref = new Firebase("https://emomix.firebaseio.com/roomlist/" + room.room_ID);
+	console.log("Current room = ", currentRoom);
+	roomlist_ref = new Firebase("https://emomix.firebaseio.com/roomlist/" + currentRoom);
 	roomlist_ref.child("Meta").child("count").once("value", function(snapshot)
 	{
 		var count = snapshot.val();
