@@ -33,19 +33,27 @@ var db = require('./database.js');
 
 //sign up = adds user to userbase if user already not in database
 //arguments are (username, password)
-db.signup("Charlie", "ilikepie");
-db.signup("Tarang", "ilikepie2");
-db.signup("Jun Ming", "noilikepie");
+//db.signup("Charlie", "ilikepie");
+//db.signup("Tarang", "ilikepie2");
+//db.signup("Jun Ming", "noilikepie");
 //signin = checks if username and password match. if so, returns an array of rooms the user is in
 //arguments are (username, password)
-db.signin("Charlie", "ilikepie");
+db.signup("Charlie", "ilikepie");
+db.signin("Charlie", "ilikepie", db.test);
+
 //createChatroom = adds a new room to the roomList. Also adds the ID of the room to the user's roomlist
 //arguments are (username, name_of_room)
 //db.createChatroom("Charlie", "CS252");
-var addTheseUsers = ["Tarang", "Jun Ming", "Charlie"];
-db.enterChatroom({room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
-db.addUsersToChatroom(addTheseUsers, {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
-db.sendMessage("Jun Ming", "sending message!", {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
+//var addTheseUsers = ["Tarang", "Jun Ming", "Charlie"];
+
+function testFunc(name, text, emotion)
+{
+	console.log("name = " + name + "\t\ntext = " + text + "\t\nemotion = " + emotion);
+}
+
+db.enterChatroom({room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"}, testFunc);
+//db.addUsersToChatroom(addTheseUsers, {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
+//db.sendMessage("Jun Ming", "sending message!", {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
 //db.test();//test function
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -78,6 +86,10 @@ io.sockets.on('connection', function (socket) {
     // new connection
 	socket.on('message', function (data) { // Broadcast the message
 		var transmit = {name : socket.nickname, message : data};
+		//DB
+		//db.signup(socket.nickname, "password");
+		//db.signin(socket.nickname, "password");
+		//db.enterChatroom({room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
 		io.sockets.emit('message', transmit);
 		tone_analyzer.tone({ text: data },
 		  function(err, tone) {

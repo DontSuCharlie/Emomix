@@ -69,6 +69,7 @@ module.exports = {
 	createChatroom: createChatroom,
 	addUsersToChatroom: addUsersToChatroom,
 	enterChatroom: enterChatroom,
+	myRooms: myRooms,
 	/*
 	removeChatroom: removeChatroom,
 	searchUsers: searchUsers,*/
@@ -148,8 +149,9 @@ function signup(username, password)
 	c) Else, load the chat rooms into the UI
 	d) Set firebase URL directory to current user
 */
-function signin(username, password)
+function signin(username, password, func)
 {
+	var returnVal;
 	userlist_ref.once("value", function(snapshot)
 	{
 		//if the username exists
@@ -172,20 +174,20 @@ function signin(username, password)
 					{
 						myRooms.push(roomArr[i]);
 					}
-					return "success";
+					func("success");
 				}
-				return "no rooms";
+				func("no rooms");
 			}
 			else
 			{
 				console.log("password" + password + "!=" + user["password"]);				
-				return "invalid password";
+				func("invalid password");
 			}
 		}
 		else
 		{
 			console.log("username not found");
-			return "username not found";
+			func("username not found");
 		}
 	});
 }
@@ -264,7 +266,7 @@ function addUsersToChatroom(users, room)
 	c) Search for the ID of the new room
 	d) Load the new room's info + all messages
 */
-function enterChatroom(room)
+function enterChatroom(room, func)
 {
 	var room_ID = room.room_ID;
 	//remove previous callback
@@ -272,17 +274,24 @@ function enterChatroom(room)
 	//update pointer to the room
 	firebase_ref = new Firebase(firebase_url + "/" + room_ID + "/Messages");
 	//reattach callback
-	firebase_ref.on("child_added", onCallback);
+	firebase_ref.on("child_added", function(snapshot)
+		{
+			var msg = snapshot.val();
+			var name = msg.name;
+			var text = msg.message;
+			var emotion = msg.emotion;
+			func(name, text, emotion);
+		});
 }
 
-
-function onCallback(snapshot)
+function onCallback(snapshot, func)
 {
 	var msg = snapshot.val();
 	var name = msg.name;
 	var text = msg.message;
 	var emotion = msg.emotion;
-	console.log("name = " + name + "\t\ntext = " + text + "\t\nemotion = " + emotion);
+	func(name, text, emotion);
+	//console.log("name = " + name + "\t\ntext = " + text + "\t\nemotion = " + emotion);
 }
 
 function displayChat(name, text, emotion)
