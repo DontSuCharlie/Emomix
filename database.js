@@ -340,6 +340,7 @@ function searchUsers()
 */
 function sendMessage(user, message)
 {
+	firebase_ref.off();
 	console.log("Current room = ", currentRoom);
 	roomlist_ref = new Firebase("https://emomix.firebaseio.com/roomlist/" + currentRoom);
 	roomlist_ref.child("Meta").child("count").once("value", function(snapshot)
