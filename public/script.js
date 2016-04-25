@@ -86,6 +86,18 @@ function setName() {
 			}
 		})  
 
+    // scroll automatically when new message arrives
+    var $cont = $('#room');
+    $cont[0].scrollTop = $cont[0].scrollHeight;
+
+    $('#room').keyup(function(e) {
+        if (e.keyCode == 13) {
+            // $cont.append('<p>' + $(this).val() + '</p>');
+            $cont[0].scrollTop = $cont[0].scrollHeight;
+            $(this).val('');
+        }
+    })
+
   }
 }
 
@@ -149,12 +161,12 @@ socket.on('nbUsers', function(msg) {
 });
 
 socket.on('usersInRoom', function(msg){
-    $("#updates").empty(); // clear, users might disconnect, and its appending
-    $("#updates").append("Users in room: <br/>")
+    $("#room").empty(); // clear, users might disconnect, and its appending
+    $("#room").append("Users in room: <br/>")
     for(i = 0; i < msg.un.length; i++){
-      $("#updates").append("- " + msg.un[i] + "<br/>");
+      $("#room").append("- " + msg.un[i] + "<br/>");
     }
-    $("#updates").append("------------");
+    // $("#updates").append("------------");
 });
 
 
