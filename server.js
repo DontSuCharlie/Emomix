@@ -132,7 +132,6 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('setName', function (data) { // Assign a name to the user
-		console.log("SETTTT");
 		if (nameArray.indexOf(data) == -1) // Test if the name is already taken
 		{
 			name = data;
