@@ -2,28 +2,26 @@
 // server side
 // Import
 
-var cfenv = require('cfenv'); // for bluemix
-// run locally or on cloud
-var serverPort = (process.env.VCAP_APP_PORT || 3000);
-var host = (process.env.VCAP_APP_HOST || '0.0.0.0');
+//bluemix initialization
+var cfenv = require('cfenv');
+var serverPort = (process.env.VCAP_APP_PORT || 3000);//process.env finds the port for bluemix. we || it so that if we're not on bluemix, we can run locally on laptop
+var host = (process.env.VCAP_APP_HOST || '0.0.0.0');//same with host
+
+//express init
 var express = require('express'), app = express();
-var http = require('http')
-  , server = http.createServer(app)
-  , io = require('socket.io').listen(server)
-  , watson = require('watson-developer-cloud');
-var jade = require('jade');
+
+var http = require('http')//for node js to connect to internets
+  , server = http.createServer(app)//creates actual server
+  , io = require('socket.io').listen(server)//uses socket.io library
+  , watson = require('watson-developer-cloud');//support for Watson
+var jade = require('jade');//support for jade
 var nameArray = [];	// contain all name of user in the room
 var users = 0; //number of connected users
-
-// Using Jade
-
-// get the app environment from Cloud Foundry
-var appEnv = cfenv.getAppEnv();
 
 server.listen(serverPort, host, function() {
 	// print a message when the server starts listening
   console.log("server starting on " + host + ":" + serverPort);
-});
+});//creating actual server
 
 /*Database shit is here. Please read comments fully
 Uncomment to play around with*/
@@ -50,18 +48,18 @@ db.addUsersToChatroom(addTheseUsers, {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_r
 db.sendMessage("Jun Ming", "sending message!", {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
 //db.test();//test function
 //////////////////////////////////////////////////////////////////////////////////
-app.set('views', __dirname + '/public');
+
+app.set('views', __dirname + '/public');//view = front end
 app.set('view engine', 'jade');
 app.set("view options", { layout: false });
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));//Express helps serve files
 
 // Render and send the main page
-
+//does magical mapping
 app.get('/', function(req, res){
   res.render('home.jade');
 });
-var watson = require('watson-developer-cloud');
 
 var tone_analyzer = watson.tone_analyzer({
   username: '170164d6-1f7b-4e0b-8d7c-aaf844ea0d5a',
@@ -70,21 +68,14 @@ var tone_analyzer = watson.tone_analyzer({
   version_date: '2016-02-11'
 });
 
-// tone_analyzer.tone({ text: 'This project is going to be epic!' },
-//   function(err, tone) {
-//     if (err)
-//       console.log(err);
-//     else
-//       console.log(JSON.stringify(tone, null, 2));
-// });
-
 app.get('/settings', function(req, res){
   res.render('settings.jade');
 });
 
+
+//actual socket shit happens here
 io.sockets.on('connection', function (socket) {
     // new connection
-    // reloadUsers();
 	socket.on('message', function (data) { // Broadcast the message
 		var transmit = {name : socket.nickname, message : data};
 		io.sockets.emit('message', transmit);
@@ -172,4 +163,3 @@ function reloadUsers() { // Send the count of the users to all
 function reloadUsersName() {
 	io.sockets.emit('usersInRoom', {"un": nameArray});
 }
-

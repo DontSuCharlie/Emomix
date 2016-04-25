@@ -58,8 +58,6 @@ The chat rooms will also hold the chat messages
 	a) Returns the list of users
 8. Send message (to current room)
 	a) pushes to current room
-
-
 */
 var testVar = 1;
 
