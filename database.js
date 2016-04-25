@@ -83,7 +83,7 @@ var username = "none";
 var firebase_ref = new Firebase(firebase_url);
 var userlist_ref = new Firebase("https://emomix.firebaseio.com/userlist");
 var roomlist_ref = new Firebase("https://emomix.firebaseio.com/roomlist");
-var myRooms;
+var myRooms = [];
 
 function test()
 {
@@ -170,13 +170,22 @@ function signin(username, password, func)
 				if(roomArr != undefined)
 				{
 					var numRooms = roomArr.length;
-					for(var i = 0; i < numRooms; i++)
+					if(numRooms != undefined)
 					{
-						myRooms.push(roomArr[i]);
+						for(var i = 0; i < numRooms; i++)
+						{
+							myRooms.push(roomArr[i]);
+						}
+						console.log("numRooms = " + numRooms);
 					}
-					func("success");
+					else
+					{
+						myRooms.push(roomArr);
+					}
+					func("success", myRooms);
 				}
-				func("no rooms");
+				else
+					func("no rooms");
 			}
 			else
 			{
@@ -268,7 +277,7 @@ function addUsersToChatroom(users, room)
 */
 function enterChatroom(room, func)
 {
-	var room_ID = room.room_ID;
+	var room_ID = room;
 	//remove previous callback
 	firebase_ref.off();
 	//update pointer to the room

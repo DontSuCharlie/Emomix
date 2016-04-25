@@ -31,6 +31,30 @@ Uncomment to play around with*/
 //every function/variable from database.js will be accessed as db.func() or db.var
 var db = require('./database.js');
 
+function getMsg(name, text, emotion)
+{
+	console.log("name = " + name + "\t\ntext = " + text + "\t\nemotion = " + emotion);
+}
+
+function getRooms(str, rooms)
+{
+	if(str == "success")
+	{
+		//load rooms
+		for(var i = 0; i < rooms.length; i++)
+		{
+			console.log("found room:");
+			console.log(rooms[i]);
+		}
+		for(var room_ID in rooms[0])
+		{
+			db.enterChatroom(room_ID, getMsg);
+		}
+	}
+	else
+		console.log(str);
+}
+
 //sign up = adds user to userbase if user already not in database
 //arguments are (username, password)
 //db.signup("Charlie", "ilikepie");
@@ -39,19 +63,14 @@ var db = require('./database.js');
 //signin = checks if username and password match. if so, returns an array of rooms the user is in
 //arguments are (username, password)
 db.signup("Charlie", "ilikepie");
-db.signin("Charlie", "ilikepie", db.test);
+db.signin("Charlie", "ilikepie", getRooms);
 
 //createChatroom = adds a new room to the roomList. Also adds the ID of the room to the user's roomlist
 //arguments are (username, name_of_room)
 //db.createChatroom("Charlie", "CS252");
 //var addTheseUsers = ["Tarang", "Jun Ming", "Charlie"];
 
-function testFunc(name, text, emotion)
-{
-	console.log("name = " + name + "\t\ntext = " + text + "\t\nemotion = " + emotion);
-}
-
-db.enterChatroom({room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"}, testFunc);
+//db.enterChatroom({room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"}, getMsg);
 //db.addUsersToChatroom(addTheseUsers, {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
 //db.sendMessage("Jun Ming", "sending message!", {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
 //db.test();//test function
