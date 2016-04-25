@@ -33,7 +33,9 @@ var db = require('./database.js');
 
 function getMsg(name, text, emotion)
 {
+	var message = {name: name, message: text};
 	console.log("name = " + name + "\t\ntext = " + text + "\t\nemotion = " + emotion);
+	io.sockets.emit('message', message);
 }
 
 function getRooms(str, rooms)
@@ -62,8 +64,8 @@ function getRooms(str, rooms)
 //db.signup("Jun Ming", "noilikepie");
 //signin = checks if username and password match. if so, returns an array of rooms the user is in
 //arguments are (username, password)
-db.signup("Charlie", "ilikepie");
-db.signin("Charlie", "ilikepie", getRooms);
+//db.signup("Charlie", "ilikepie");
+//db.signin("Charlie", "ilikepie", getRooms);
 
 //createChatroom = adds a new room to the roomList. Also adds the ID of the room to the user's roomlist
 //arguments are (username, name_of_room)
@@ -105,9 +107,6 @@ io.sockets.on('connection', function (socket) {
     // new connection
 	socket.on('message', function (data) { // Broadcast the message
 		var transmit = {name : socket.nickname, message : data};
-		//DB
-		//db.signup(socket.nickname, "password");
-		//db.signin(socket.nickname, "password");
 		//db.enterChatroom({room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
 		io.sockets.emit('message', transmit);
 		tone_analyzer.tone({ text: data },
@@ -163,6 +162,10 @@ io.sockets.on('connection', function (socket) {
 			users += 1; // only increment when name is not taken
 			reloadUsers();
 			reloadUsersName();
+			//DB
+			console.log("in socket.on: " + socket.nickname);
+			db.signup(socket.nickname, "ilikepie");
+			db.signin(socket.nickname, "ilikepie", getRooms);
 		}
 		else
 		{
