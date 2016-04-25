@@ -246,23 +246,25 @@ body {
     33px -6px 0px rgba(39, 74, 214, 0.28);
 }
 
-#left {
-  width: 100px;
-  float: left;
-  height: 100%;
-  /*background-color: #fff;*/
-  margin-top: 80px;
-  margin-left: 150px;
+#right {
+    width: 10%;
+    float: right;
+    height: 100%;
+    /*background-color: #fff;*/
+    margin-top: 3.3%;
+    margin-right: 1%; 
 }
 
-#right {
-  width: 15%;
+#middle {
+  width: 10%;
   float: right;
   height: 100%;
   /*background-color: #fff;*/
   margin-top: 3%;
-  margin-right: 10%;
+  margin-right: 2%;
 }
+
+
 
 #submit {
     width:12%;
@@ -280,10 +282,10 @@ body {
     position: absolute;
     width: 71.5%;
     height: 3%;
-    border: none;
-    font-size: 17px;
     margin-top: 32.5%;
     margin-left: 1%;
+    border: none;
+    font-size: 17px;
     border-bottom: 2px solid blue;
     border-radius: 2px;
 }*/
@@ -340,42 +342,39 @@ body {
     margin-left: 650px;
 }*/
 
-* { box-sizing:border-box; }
 
 
-/* MessageBox */
 /* form starting stylings ------------------------------- */
 .group            { 
-  position:relative; 
-  margin-bottom:45px; 
-}
-
-#messageInput  {
     position: absolute;
-    height: 12%;
-    width: 71%;
-    margin-top: 32.5%;
+    width: 70.5%;
+    height: 3%;
+    margin-top: 33.5%;
     margin-left: 1%;
-    font-size:18px;
-    padding:10px 10px 10px 5px;
-    display:block;
-    border:none;
-    border-bottom:1px solid #757575;
 }
-/*input:focus         { outline:none; }*/
+#messageInput {
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width: 100%;
+  border:none;
+  height: 10%;
+  border-bottom:1px solid #757575;
+}
+#messageInput:focus         { outline:none; }
 
 /* LABEL ======================================= */
 label                {
-    color:#999; 
-    font-size:18px;
-    font-weight:normal;
-    pointer-events:none;
-    transition:0.2s ease all; 
-    -moz-transition:0.2s ease all; 
-    -webkit-transition:0.2s ease all;
-    position: absolute;
-    margin-top: 32.5%;
-    margin-left: 1%;
+  color:#999; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:0px;
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
 }
 
 /* active state */
@@ -386,26 +385,17 @@ label                {
 }
 
 /* BOTTOM BARS ================================= */
-.bar { 
-    display:block; 
-    width:300px; 
-    position: absolute;
-    height: 5%;
-    width: 71%;
-    margin-top: 32.5%;
-    margin-left: 1%;
- }
+.bar    { position:relative; display:block; width:101%; }
 .bar:before, .bar:after     {
-    content:'';
-    height:2px; 
-    width:0;
-    bottom:1px; 
-    position:absolute;
-    background:#5264AE; 
-    transition:0.2s ease all; 
-    -moz-transition:0.2s ease all; 
-    -webkit-transition:0.2s ease all;
-    
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#5264AE; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
 }
 .bar:before {
   left:50%;
@@ -421,17 +411,13 @@ label                {
 
 /* HIGHLIGHTER ================================== */
 .highlight {
-    position: absolute;
-    height: 5%;
-    width: 71%;
-    margin-top: 32.5%;
-    margin-left: 1%;
-    height:60%; 
-    width:100px; 
-    top:25%; 
-    left:0;
-    pointer-events:none;
-    opacity:0.5;
+  position:absolute;
+  height:60%; 
+  width:100px; 
+  top:25%; 
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
 }
 
 /* active state */
