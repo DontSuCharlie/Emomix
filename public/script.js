@@ -57,11 +57,12 @@ function sendMessage() {
     }
 }
 
-function setName() {
+function setName(isSignIn) {
     if ($("#nameInput").val() != "")
     {
     	$.modal.close();
     	socket.emit('setName', $("#nameInput").val());
+      socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val()});
       socket.on('nameStatus', function(data){
 			if(data == "ok")
 			{
@@ -74,7 +75,8 @@ function setName() {
             //console.log(array);
 		        $('#chatControls').show();
 		        $('#nameInput').hide();
-		        $('#nameSet').hide();
+		        $('#signUp').hide();
+            $('#signIn').hide();
 		        $("#welcomeParagraph").show();
 		        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to Emomix.</p></div>');   
             // $("#userName").html('<div class="User in room"><p> ' + $("#nameInput").val() + '</p></div>');  
@@ -240,7 +242,9 @@ $(function() {
 		}
 	});
     $('#nameForm').modal();
-    $("#nameSet").click(function() {setName()});
+    $("#signUp").click(function() {setName(0)});
+    $("#signIn").click(function() {setName(1)});
+    $("#").click(function() {setName()});
     $("#submit").click(function() {sendMessage();});
     $("#welcomeParagraph").hide();
 });

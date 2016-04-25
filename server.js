@@ -162,10 +162,6 @@ io.sockets.on('connection', function (socket) {
 			users += 1; // only increment when name is not taken
 			reloadUsers();
 			reloadUsersName();
-			//DB
-			console.log("in socket.on: " + socket.nickname);
-			db.signup(socket.nickname, "ilikepie");
-			db.signin(socket.nickname, "ilikepie", getRooms);
 		}
 		else
 		{
@@ -173,6 +169,14 @@ io.sockets.on('connection', function (socket) {
 		}
 		reloadUsersName();
 	});	
+
+	socket.on('setUser', function (data) {
+		// DB
+		console.log("in socket.on: " + socket.nickname);
+		db.signup(data['username'], data['password']);
+		db.signin(data['username'], data['password'], getRooms);
+	});
+
 	socket.on('disconnect', function () { // Disconnection of the client
 		// sent by socket io automatically 
 		console.log("Disconnection");
