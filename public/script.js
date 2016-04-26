@@ -84,12 +84,12 @@ function setName(isSignIn) {
 			else if(data == "error")
 			{
 				alert("Name Already Taken");
-				$('#nameForm').modal();
+				$('#nameForm').modal({escapeClose: false, clickClose: false, showClose: false});
 			}
 			else if(data == "wrongPassword")
 			{
 				alert("Wrong password");
-				$("#nameForm").modal();
+				$("#nameForm").modal({escapeClose: false, clickClose: false, showClose: false});
 			}
 		})  
 
@@ -244,7 +244,8 @@ $(function() {
 			sendMessage();
 		}
 	});
-    $('#nameForm').modal({backdrop: 'static', keyboard: false});
+	
+    $('#nameForm').modal({escapeClose: false, clickClose: false, showClose: false});
     $("#signUp").click(function() {setName(0)});
     $("#signIn").click(function() {setName(1)});
     $("#").click(function() {setName()});
