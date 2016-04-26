@@ -54,7 +54,9 @@ function getRooms(str, rooms)
 		}
 	}
 	else
+	{
 		console.log(str);
+	}
 }
 
 //sign up = adds user to userbase if user already not in database
@@ -176,11 +178,13 @@ io.sockets.on('connection', function (socket) {
 		if(data['isSignIn']) {
 			// sign in
 			db.signin(data['username'], data['password'], getRooms);
-		} else {
+		} 
+		else {
 			// sign up
-			db.signup(data['username'], data['password']);
-			// then sign in
-			db.signin(data['username'], data['password'], getRooms);
+			db.signup(data['username'], data['password'], function(username, password)
+				{
+					db.signin(data['username'], data['password'], getRooms);
+				});
 		}
 	});
 

@@ -120,7 +120,7 @@ function queryForUser(snapshot)
 Pet Peeve #1 with Javascript: The only way to prevent asynchrony is with callbacks. Let's say I have a function that does two actions where the second
 action is dependent on the first. The only way to guarantee it is to turn both actions into functions and then chain them together. Talk about unnecessary overuse of the stack!
 */
-function signup(username, password)
+function signup(username, password, func)
 {
 	return userlist_ref.once('value', function(snapshot)
 	{
@@ -130,9 +130,11 @@ function signup(username, password)
 			console.log("Creating new user " + username);
 			//create new object
 			var newUser = new Object();
-			newUser = {password: password, rooms: []};
+			var defaultRoom = {'-KFwxfEIgyC_z6omvB0P': "CS Majors Only"};
+			newUser = {password: password, rooms: defaultRoom};
 			//newUser[username] = {password: password, rooms: []};
 			userlist_ref.child(username).set(newUser);
+			func(username, password);
 			return true;
 		}
 		//if it doesn't, add the new user!
