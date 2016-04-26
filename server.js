@@ -177,13 +177,22 @@ io.sockets.on('connection', function (socket) {
 		console.log("in socket.on: " + socket.nickname);
 		if(data['isSignIn']) {
 			// sign in
-			db.signin(data['username'], data['password'], getRooms);
+			db.signin(data['username'], data['password'], function(str, room)
+				{
+					if(str == "success")
+						getRooms(str, room);
+					else
+						socket.emit("nameStatus", "error");
+				});
 		} 
 		else {
 			// sign up
-			db.signup(data['username'], data['password'], function(username, password)
+			db.signup(data['username'], data['password'], function(username, password, bool)
 				{
-					db.signin(data['username'], data['password'], getRooms);
+					if(bool)
+						db.signin(data['username'], data['password'], getRooms);
+					else
+						socket.emit('nameStatus', 'error');
 				});
 		}
 	});

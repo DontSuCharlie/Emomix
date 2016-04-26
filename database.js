@@ -134,14 +134,13 @@ function signup(username, password, func)
 			newUser = {password: password, rooms: defaultRoom};
 			//newUser[username] = {password: password, rooms: []};
 			userlist_ref.child(username).set(newUser);
-			func(username, password);
-			return true;
+			func(username, password, true);
 		}
 		//if it doesn't, add the new user!
 		else//return error
 		{
 			console.log("Username already exists");
-			return false;
+			func(username, password, false);
 		}
 	});
 }
