@@ -47,6 +47,7 @@ header {
 footer {
   width: 20%;
   margin: 1% auto;
+  color:white;
   border-top: 1px dotted #ccc;
   /*padding-top: px;*/
   font-size: 13px;
@@ -334,6 +335,7 @@ body {
     margin: 46px auto;
     width: 20%;
     margin-top: 38%;
+    color:white;
 }
 
 #nameSearch {
