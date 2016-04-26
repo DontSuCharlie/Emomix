@@ -182,7 +182,7 @@ io.sockets.on('connection', function (socket) {
 					if(str == "success")
 						getRooms(str, room);
 					else
-						socket.emit("nameStatus", "error");
+						socket.emit("nameStatus", "wrongPassword");
 				});
 		} 
 		else {

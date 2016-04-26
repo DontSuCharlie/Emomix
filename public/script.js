@@ -81,11 +81,16 @@ function setName(isSignIn) {
 		        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to Emomix.</p></div>');   
             // $("#userName").html('<div class="User in room"><p> ' + $("#nameInput").val() + '</p></div>');  
 			}
-			else
+			else if(data == "error")
 			{
 				alert("Name Already Taken");
 				$('#nameForm').modal();
 			}
+      else if(data == "wrongPassword")
+      {
+        alert("Wrong password");
+        $("#nameForm").modal();
+      }
 		})  
 
     // scroll automatically when new message arrives
