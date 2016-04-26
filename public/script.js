@@ -111,6 +111,7 @@ socket.on('emotion', function(data) {
   addEmotion(data['emotion'], data['name']);
 });
 
+
 // added custom method to String
 String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
 
