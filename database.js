@@ -339,7 +339,7 @@ function searchUsers()
 8. Send message (to current room)
 	a) pushes to current room
 */
-function sendMessage(user, message)
+function sendMessage(user, message, emotion)
 {
 	firebase_ref.off();
 	console.log("Current room = ", currentRoom);
@@ -352,7 +352,7 @@ function sendMessage(user, message)
 		roomlist_ref.child("Messages").push({
 					name: user,
 					message: message,
-					emotion: "Happy",
+					emotion: emotion,
 					date: new Date().getTime()
 				}
 		);

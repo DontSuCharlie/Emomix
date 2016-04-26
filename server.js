@@ -34,8 +34,10 @@ var db = require('./database.js');
 function getMsg(name, text, emotion)
 {
 	var message = {name: name, message: text};
+	var emoticon = {name: name, emotion: emotion["emotion"]};
 	console.log("name = " + name + "\t\ntext = " + text + "\t\nemotion = " + emotion);
 	io.sockets.emit('message', message);
+	io.sockets.emit('emotion', emoticon);
 }
 
 function getRooms(str, rooms)
@@ -109,7 +111,6 @@ io.sockets.on('connection', function (socket) {
     // new connection
 	socket.on('message', function (data) { // Broadcast the message
 		var transmit = {name : socket.nickname, message : data};
-		db.sendMessage(socket.nickname, data);
 		io.sockets.emit('message', transmit);
 		tone_analyzer.tone({ text: data },
 		  function(err, tone) {
@@ -134,8 +135,10 @@ io.sockets.on('connection', function (socket) {
 				console.log(emotionTone[largest]["score"]);
 				console.log(emotionTone[largest]["tone_name"]);
 				// need better way to show emotion along with message--both same time
-				var transmitEmotion = {name: socket.nickname, message :"is feeling " + emotionTone[largest]["tone_name"]};
+				var transmitEmotion = {name: socket.nickname, emotion :"is feeling " + emotionTone[largest]["tone_name"]};
+				var emotionMsg = {emotion: "is feeling " + emotionTone[largest]["tone_name"]};
 				io.sockets.emit('emotion', transmitEmotion);
+				db.sendMessage(socket.nickname, data, emotionMsg);
 		    }
 		});
 

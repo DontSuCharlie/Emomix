@@ -108,7 +108,7 @@ function setName(isSignIn) {
 }
 
 socket.on('emotion', function(data) {
-  addEmotion(data['message'], data['name']);
+  addEmotion(data['emotion'], data['name']);
 });
 
 // added custom method to String
