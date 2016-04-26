@@ -173,8 +173,15 @@ io.sockets.on('connection', function (socket) {
 	socket.on('setUser', function (data) {
 		// DB
 		console.log("in socket.on: " + socket.nickname);
-		db.signup(data['username'], data['password']);
-		db.signin(data['username'], data['password'], getRooms);
+		if(data['isSignIn']) {
+			// sign in
+			db.signin(data['username'], data['password'], getRooms);
+		} else {
+			// sign up
+			db.signup(data['username'], data['password']);
+			// then sign in
+			db.signin(data['username'], data['password'], getRooms);
+		}
 	});
 
 	socket.on('disconnect', function () { // Disconnection of the client

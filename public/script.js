@@ -62,7 +62,7 @@ function setName(isSignIn) {
     {
     	$.modal.close();
     	socket.emit('setName', $("#nameInput").val());
-      socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val()});
+      socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val(), isSignIn: isSignIn});
       socket.on('nameStatus', function(data){
 			if(data == "ok")
 			{
