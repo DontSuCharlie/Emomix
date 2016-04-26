@@ -158,21 +158,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('setName', function (data) { // Assign a name to the user
-		if (nameArray.indexOf(data) == -1) // Test if the name is already taken
-		{
-			name = data;
-			nameArray.push(data);
-			socket.nickname = data;
-			socket.emit('nameStatus', 'ok');
-			users += 1; // only increment when name is not taken
-			reloadUsers();
-			reloadUsersName();
-		}
-		else
-		{
-			socket.emit('nameStatus', 'error') // Send the error
-		}
-		reloadUsersName();
+		
 	});	
 
 	socket.on('setUser', function (data) {
@@ -182,8 +168,24 @@ io.sockets.on('connection', function (socket) {
 			// sign in
 			db.signin(data['username'], data['password'], function(str, room)
 				{
-					if(str == "success")
+					if(str == "success") {
 						getRooms(str, room);
+						if (nameArray.indexOf(data['username']) == -1) // Test if the name is already taken
+						{
+							name = data['username'];
+							nameArray.push(data['username']);
+							socket.nickname = data['username'];
+							socket.emit('nameStatus', 'ok');
+							users += 1; // only increment when name is not taken
+							reloadUsers();
+							reloadUsersName();
+						}
+						else
+						{
+							socket.emit('nameStatus', 'error') // Send the error
+						}
+						reloadUsersName();
+					}
 					else
 						socket.emit("nameStatus", "wrongPassword");
 				});
@@ -192,8 +194,24 @@ io.sockets.on('connection', function (socket) {
 			// sign up
 			db.signup(data['username'], data['password'], function(username, password, bool)
 				{
-					if(bool)
+					if(bool){
 						db.signin(data['username'], data['password'], getRooms);
+						if (nameArray.indexOf(data['username']) == -1) // Test if the name is already taken
+						{
+							name = data['username'];
+							nameArray.push(data['username']);
+							socket.nickname = data['username'];
+							socket.emit('nameStatus', 'ok');
+							users += 1; // only increment when name is not taken
+							reloadUsers();
+							reloadUsersName();
+						}
+						else
+						{
+							socket.emit('nameStatus', 'error') // Send the error
+						}
+						reloadUsersName();
+					}
 					else
 						socket.emit('nameStatus', 'error');
 				});
