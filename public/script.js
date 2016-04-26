@@ -60,37 +60,37 @@ function sendMessage() {
 function setName(isSignIn) {
     if ($("#nameInput").val() != "")
     {
-    	$.modal.close();
-    	socket.emit('setName', $("#nameInput").val());
-      socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val(), isSignIn: isSignIn});
-      socket.on('nameStatus', function(data){
+		$.modal.close();
+		socket.emit('setName', $("#nameInput").val());
+		socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val(), isSignIn: isSignIn});
+		socket.on('nameStatus', function(data){
 			if(data == "ok")
 			{
-    				// user entered room -- make light colored
-    				socket.emit('enteredRoom', "User " + $("#nameInput").val() + " entered the room");
+				// user entered room -- make light colored
+				socket.emit('enteredRoom', "User " + $("#nameInput").val() + " entered the room");
 
-    				// addMessage("User " + $("#nameInput").val() + " entered room", "Me"); 
-    		    currentUser = $("#nameInput").val();
-            array.push(currentUser);
-            //console.log(array);
+				// addMessage("User " + $("#nameInput").val() + " entered room", "Me"); 
+			    currentUser = $("#nameInput").val();
+		    	array.push(currentUser);
+		   		//console.log(array);
 		        $('#chatControls').show();
-		        $('#nameInput').hide();
-		        $('#signUp').hide();
-            $('#signIn').hide();
+		        // $('#nameInput').hide();
+		        // $('#signUp').hide();
+		  // 		  $('#signIn').hide();
 		        $("#welcomeParagraph").show();
 		        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to Emomix.</p></div>');   
-            // $("#userName").html('<div class="User in room"><p> ' + $("#nameInput").val() + '</p></div>');  
+		    // $("#userName").html('<div class="User in room"><p> ' + $("#nameInput").val() + '</p></div>');  
 			}
 			else if(data == "error")
 			{
 				alert("Name Already Taken");
 				$('#nameForm').modal();
 			}
-      else if(data == "wrongPassword")
-      {
-        alert("Wrong password");
-        $("#nameForm").modal();
-      }
+			else if(data == "wrongPassword")
+			{
+				alert("Wrong password");
+				$("#nameForm").modal();
+			}
 		})  
 
     // scroll automatically when new message arrives
@@ -104,13 +104,11 @@ function setName(isSignIn) {
             $(this).val('');
         }
     })
-
   }
 }
 
 socket.on('emotion', function(data) {
   addEmotion(data['message'], data['name']);
-
 });
 
 // added custom method to String
@@ -246,7 +244,7 @@ $(function() {
 			sendMessage();
 		}
 	});
-    $('#nameForm').modal();
+    $('#nameForm').modal({backdrop: 'static', keyboard: false});
     $("#signUp").click(function() {setName(0)});
     $("#signIn").click(function() {setName(1)});
     $("#").click(function() {setName()});
