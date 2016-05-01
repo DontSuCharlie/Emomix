@@ -7,6 +7,7 @@ var userCount = 0;
 var currentUser = '';
 var array = [];
 
+var prevNotification;
 function timeoutFunction(){
   typing = false;
   socket.emit("typing", {isTyping: false, person: currentUser});
@@ -198,6 +199,7 @@ function notifyMe(user,message) {
           dir : "ltr"
       };
       var notification = new Notification(user + " Sent a message",options);
+      
     }
     // Otherwise, we need to ask the user for permission
     // Note, Chrome does not implement the permission static property
